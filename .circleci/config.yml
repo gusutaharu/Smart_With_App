@@ -16,7 +16,7 @@ jobs:
           pkg-manager: yarn
   test:
     docker:
-      - image: cimg/ruby:2.7.4-node-browsers
+      - image: cimg/ruby:2.7.4-browsers
       - image: circleci/postgres
         environment:
           POSTGRES_USER: postgres
