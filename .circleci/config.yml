@@ -4,7 +4,7 @@ orbs:
   ruby: circleci/ruby@1.1.4
   node: circleci/node@4.7.0
 
-josbs:
+jobs:
   build:
     docker:
       - image: cimg/ruby:2.7.4-node-browsers
@@ -36,11 +36,11 @@ josbs:
       - node/install-packages:
           pkg-manager: yarn
       - run:
-        name: Wait for DB
-        command: dockerize -wait tcp://localhost:5432 -timeout 1m
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
-        name: Database setup
-        command: bundle exec rails db:schema:load --trace
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
       - ruby/rspec-test
       - ruby/rubocop-check
 
