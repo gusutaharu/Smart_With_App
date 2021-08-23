@@ -44,10 +44,10 @@ josbs:
       - ruby/rspec-test
       - ruby/rubocop-check
 
-wordkflows:
+workflows:
   build_and_test:
     jobs:
       - build
       - test:
           requires:
-            -build
+            - build
