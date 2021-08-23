@@ -7,7 +7,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:2.7.4-node-browsers
+      - image: cimg/ruby:2.7.4-browsers
     working_directory: ~/repo
     steps:
       - checkout
