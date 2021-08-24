@@ -42,8 +42,9 @@ jobs:
           name: Database setup
           command: |
             bundle exec rails db:create db:migrate db:seed
-
-      - ruby/rspec-test
+      - run:
+          name: Run rubocop
+          command: bundle exec rubocop --require rubocop-airbnb
       - ruby/rubocop-check
 
 workflows:
