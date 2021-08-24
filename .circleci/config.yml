@@ -21,14 +21,14 @@ jobs:
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: myapp_test
-          POSTGRES_PASSWORD: ""
+          POSTGRES_PASSWORD: password
     working_directory: ~/repo
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
       PGHOST: 127.0.0.1
       PGUSER: postgres
-      PGPASSWORD: ""
+      PGPASSWORD: password
       RAILS_ENV: test
     steps:
       - checkout
