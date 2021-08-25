@@ -14,3 +14,4 @@ AllCops:
     - 'config/initializers/*'
     - 'db/**/*'
     - 'spec/spec_helper.rb'
+    - 'vendor/**/*'
