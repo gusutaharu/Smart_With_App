@@ -84,7 +84,7 @@ workflows:
           requires:
             - build
       - deploy:
-          require:
+          requires:
             - rspec
           filters:
             branches:
