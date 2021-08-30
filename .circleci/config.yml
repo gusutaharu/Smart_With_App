@@ -1,0 +1,93 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.1.4
+  node: circleci/node@4.7.0
+  heroku: circleci/heroku@1.2.6
+
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:2.7.4-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+
+  rubocop:
+    docker:
+      - image: cimg/ruby:2.7.4-browsers
+    steps:
+      - checkout
+      - ruby/install-deps
+      - ruby/rubocop-check
+
+  rspec:
+    docker:
+      - image: cimg/ruby:2.7.4-browsers
+      - image: circleci/postgres
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: myapp_test
+          POSTGRES_PASSWORD: password
+    working_directory: ~/repo
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: 127.0.0.1
+      PGUSER: postgres
+      PGPASSWORD: password
+      RAILS_ENV: test
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: |
+            bundle exec rails db:create db:migrate db:seed
+      - ruby/rspec-test
+
+  deploy:
+    docker:
+      - image: cimg/ruby:2.7.4-browsers
+    steps:
+      - checkout
+      - setup_remote_docker
+      - heroku/install
+      - run:
+          name: heroku login
+          command: heroku container:login
+      - run:
+          name: push docker image
+          command: heroku container:push web -a $HEROKU_APP_NAME
+      - run:
+          name: release docker image
+          command: heroku container:release web -a $HEROKU_APP_NAME
+      - run:
+          name: database setup
+          command: heroku run bundle exec rake db:migrate RAILS_ENV=production -a $HEROKU_APP_NAME
+
+workflows:
+  version: 2
+  build_and_test_and_deploy:
+    jobs:
+      - build
+      - rubocop
+      - rspec:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - rspec
+          filters:
+            branches:
+              only:
+                - develop
+                - master
