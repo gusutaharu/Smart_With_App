@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@1.1.4
   node: circleci/node@4.7.0
+  heroku: circleci/heroku@1.2.6
 
 jobs:
   build:
@@ -53,12 +54,40 @@ jobs:
             bundle exec rails db:create db:migrate db:seed
       - ruby/rspec-test
 
+  deploy:
+    docker:
+      - image: cimg/ruby:2.7.4-browsers
+    steps:
+      - checkout
+      - setup_remote_docker
+      - heroku/install
+      - run:
+          name: heroku login
+          command: heroku container:login
+      - run:
+          name: push docker image
+          command: heroku container:push web -a $HEROKU_APP_NAME
+      - run:
+          name: release docker image
+          command: heroku container:release web -a $HEROKU_APP_NAME
+      - run:
+          name: database setup
+          command: heroku run bundle exec rake db:migrate RAILS_ENV=production -a $HEROKU_APP_NAME
+
 workflows:
   version: 2
-  build_and_test:
+  build_and_test_and_deploy:
     jobs:
       - build
       - rubocop
       - rspec:
           requires:
             - build
+      - deploy:
+          require:
+            - rspec
+          filters:
+            branches:
+              only:
+                - develop
+                - master
