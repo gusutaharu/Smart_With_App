@@ -1,2 +1,6 @@
-h1 Questions#show
-p Find me in app/views/questions/show.html.slim
+.container-sm.mx-auto.p-5
+  h1 質問詳細
+  = @question.id
+  = @question.title
+  = @question.information
+  = @question.content
