@@ -1,6 +1,10 @@
 class QuestionsController < ApplicationController
+  NEW_QUESTIONS_COUNT = 5
   def index
-    @questions = Question.all
+    @question_top_id = Question.all.ids.max
+    @question_top = Question.find(@question_top_id)
+    @questions = Question.where.not(id: @question_top_id).limit(NEW_QUESTIONS_COUNT)
+    @questions_sort = Question.all
   end
 
   def show
@@ -23,6 +27,6 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title,:information,:content)
+    params.require(:question).permit(:title, :information, :content)
   end
 end

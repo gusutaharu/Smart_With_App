@@ -1,6 +1,7 @@
-.container-sm.mx-auto.p-5
-  h1 質問詳細
-  = @question.id
-  = @question.title
-  = @question.information
-  = @question.content
+.container.solid-deco.mx-auto.p-sm-5.p-2
+  label.fs-4 タイトル
+  p.form-deco.mt-3.px-2.py-3 = @question.title
+  label.fs-4 情報
+  p.form-deco.mt-3.px-2.py-3 = @question.information
+  label.fs-4 内容
+  p.form-deco.mt-3.px-2.py-3 = @question.content

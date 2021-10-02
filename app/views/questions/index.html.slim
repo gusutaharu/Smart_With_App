@@ -1,7 +1,27 @@
-.container-sm.mx-auto.p-5
-  h1 新しい質問
-  - @questions.each do |question|
-    = question.id
-    = question.title
-    = question.information
-    = question.content
+.container.mx-auto.p-sm-4.p-3
+  .row
+    h2.text-secondary.fw-bold 新着の質問
+    .col-md.me-sm-4.p-4
+      .my-3
+        label.btn-deco.rounded-pill.px-3.py-1.my-3 タイトル
+        .btn-deco.p-2
+          = @question_top.title
+      .my-3
+        label.btn-deco.rounded-pill.px-3.py-1.my-3 情報
+        .btn-deco.p-2
+          = @question_top.information
+      .my-3.p-2
+        label.btn-deco.rounded-pill.px-3.py-1.my-3 内容
+        .btn-deco.p-2
+          = @question_top.content
+      .text-end
+        = link_to "この質問の詳細へ", @question_1, class: "btn btn-deco"
+    .col-md.solid-deco
+      - @questions.each do |question|
+        .form-deco.p-2.my-3
+          .btn-deco.p-1
+            = link_to "#{question.title}", question
+            .d-flex.justify-content-between
+              p 未回答
+              = question.created_at
+= render "questions_list", questions: @questions_sort

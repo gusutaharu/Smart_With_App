@@ -1,4 +1,4 @@
-.container-sm.mx-auto.p-5
+.container.solid-deco.mx-auto.p-sm-5.p-2.fs-4
   = form_with model: @question, local: true do |f|
     .form-group.mb-5
       = f.label "タイトル"
@@ -6,8 +6,8 @@
     .form-group.mb-5
       = f.label "情報"
       = f.text_area :information, rows: 5,class: "form-control form-deco mt-3 px-2 py-3", id: "question_information"
-    .form-group.mb-5
+    .form-group.mb-4
       = f.label "内容"
       = f.text_area :content, rows: 10, class: "form-control form-deco mt-3 px-2 py-3", id: "question_content"
     .text-end
-      = f.submit nil, class: "btn border-light bg-white confirm-btn", value: "確認"
+      = f.submit nil, class: "btn border-light bg-white confirm-btn px-5", value: "確認"

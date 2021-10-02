@@ -1,0 +1,25 @@
+.container.mx-auto.my-5
+  ul#pills-tab.nav.nav-pills.mb-3[role="tablist"]
+    li.nav-item[role="presentation"]
+      a#pills-home-tab.nav-link.btn-deco.me-2.active[data-bs-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"]
+        | 未回答の質問
+    li.nav-item[role="presentation"]
+      a#pills-profile-tab.nav-link.btn-deco[data-bs-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"]
+        | 回答済みの質問
+  #pills-tabContent.tab-content
+    #pills-home.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="pills-home-tab"]
+      - questions.each do |question|
+          .form-deco.p-2.mt-3
+            .btn-deco.p-1
+              = link_to "#{question.title}", question
+              .d-flex.justify-content-between
+                p 未回答
+                = question.created_at
+    #pills-profile.tab-pane.fade[role="tabpanel" aria-labelledby="pills-profile-tab"]
+      - questions.each do |question|
+          .form-deco.p-2.mt-3
+            .btn-deco.p-1
+              = link_to "#{question.title}", question
+              .d-flex.justify-content-between
+                p 未回答
+                = question.created_at

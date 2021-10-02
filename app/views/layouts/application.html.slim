@@ -9,7 +9,9 @@ html
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    = render "shared/header"
-    .main-wrapper.bg-light.px-1.py-5
+    = render "layouts/header"
+    .main-wrapper.bg-light.p-1.p-sm-5
+      - if flash.notice.present?
+        .alert.alert-success= flash.notice
       = yield
-    = render "shared/footer"
+    = render "layouts/footer"
