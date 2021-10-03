@@ -22,6 +22,19 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+    @question = Question.find(params[:id])
+    @question.update!(question_params)
+    redirect_to question_url, notice: "質問を更新しました"
+  end
+
+  def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    redirect_to root_url, notice: "質問を削除しました。"
   end
 
   private
