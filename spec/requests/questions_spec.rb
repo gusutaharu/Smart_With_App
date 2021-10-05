@@ -1,30 +1,35 @@
 require 'rails_helper'
 
 RSpec.describe "Questions", type: :request do
+  before do
+    @question = FactoryBot.create(:question)
+  end
+
   describe "GET /index" do
-    it "returns http success" do
-      get "/"
+    it "正常なレスポンスを返す" do
+      FactoryBot.create_list(:question, 5)
+      get root_path
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET /show" do
-    xit "returns http success" do
-      get "/questions/show"
+    it "正常なレスポンスを返す" do
+      get question_path(@question.id)
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET /new" do
-    xit "returns http success" do
+    it "正常なレスポンスを返す" do
       get "/questions/new"
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET /edit" do
-    xit "returns http success" do
-      get "/questions/edit"
+    it "正常なレスポンスを返す" do
+      get edit_question_path(@question.id)
       expect(response).to have_http_status(:success)
     end
   end

@@ -1,10 +1,8 @@
 class QuestionsController < ApplicationController
-  NEW_QUESTIONS_COUNT = 5
   def index
-    @question_top_id = Question.all.ids.max
-    @question_top = Question.find(@question_top_id)
-    @questions = Question.where.not(id: @question_top_id).limit(NEW_QUESTIONS_COUNT)
-    @questions_sort = Question.all
+    questions = Question.all.order(created_at: :desc)
+    @question_top = questions.first
+    @questions = questions[2..6]
   end
 
   def show
@@ -16,9 +14,12 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.create(question_params)
-    @question.save!
-    redirect_to questions_url, notice: "質問が作成されました"
+    @question = Question.new(question_params)
+    if @question.save
+      redirect_to questions_url, notice: "質問が作成されました"
+    else
+      render :new
+    end
   end
 
   def edit

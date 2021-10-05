@@ -1,3 +1,7 @@
+- if question.errors.present?
+  ul#error_explanation.text-center
+    - question.errors.full_messages.each do |message|
+      li= message
 .container.solid-deco.mx-auto.p-sm-5.p-2.fs-4
   = form_with model: question, local: true do |f|
     .form-group.mb-5
