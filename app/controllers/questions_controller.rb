@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_action :set_keyword
+
   def index
     questions = Question.all.order(created_at: :desc)
     @question_top = questions.first
@@ -48,9 +50,17 @@ class QuestionsController < ApplicationController
     redirect_to root_url, notice: "質問を削除しました。"
   end
 
+  def search_results
+    @search_results = @q.result.order(created_at: :desc)
+  end
+
   private
 
   def question_params
     params.require(:question).permit(:title, :information, :content)
+  end
+
+  def set_keyword
+    @q = Question.ransack(params[:q])
   end
 end

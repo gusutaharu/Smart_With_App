@@ -2,9 +2,9 @@ header
   nav.navbar.navbar-expand-lg.bg-light.d-flex.flex-column
     .container-fluid.d-flex.justify-content-around.mt-3.mb-5
       = link_to "SmartWith", root_path, class: "navbar-brand fs-1 fw-bold text-secondary"
-      form.d-flex
-        input.form-control.me-2.form-deco type="search" placeholder="Search" aria-label="Search"
-        button.btn.btn-deco.border-light type="submit" Search
+      = search_form_for q, url: search_results_questions_path, class: "d-flex" do |f|
+        = f.search_field :title_or_information_or_content_cont, class: "form-deco form-control me-2"
+        = f.submit class: "btn btn-deco"
     button.navbar-toggler.btn-deco.border-light type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
       span.navbar-toggler-icon
     .collapse.navbar-collapse#navbarSupportedContent
