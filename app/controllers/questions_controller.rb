@@ -13,8 +13,18 @@ class QuestionsController < ApplicationController
     @question = Question.new
   end
 
+  def confirm_new
+    @question = Question.new(question_params)
+    render :new unless @question.valid?
+  end
+
   def create
     @question = Question.new(question_params)
+    if params[:back].present?
+      render :new
+      return
+    end
+
     if @question.save
       redirect_to questions_url, notice: "質問が作成されました"
     else

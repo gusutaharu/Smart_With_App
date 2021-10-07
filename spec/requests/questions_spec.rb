@@ -22,7 +22,7 @@ RSpec.describe "Questions", type: :request do
 
   describe "GET /new" do
     it "正常なレスポンスを返す" do
-      get "/questions/new"
+      get new_question_path
       expect(response).to have_http_status(:success)
     end
   end

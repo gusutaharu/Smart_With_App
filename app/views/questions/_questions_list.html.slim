@@ -14,7 +14,7 @@
               = link_to "#{question.title}", question
               .d-flex.justify-content-between
                 p 未回答
-                = question.created_at
+                = question.created_at.strftime('%Y/%m/%d')
     #pills-profile.tab-pane.fade[role="tabpanel" aria-labelledby="pills-profile-tab"]
       - questions.each do |question|
           .form-deco.p-2.mt-3
@@ -22,4 +22,4 @@
               = link_to "#{question.title}", question
               .d-flex.justify-content-between
                 p 未回答
-                = question.created_at
+                = question.created_at.strftime('%Y/%m/%d')
