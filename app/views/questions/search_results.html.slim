@@ -6,3 +6,6 @@
         .d-flex.justify-content-between
           p 未回答
           = search_result.created_at.strftime('%Y/%m/%d')
+  .mt-3
+    = paginate @search_results
+    = page_entries_info @search_results
