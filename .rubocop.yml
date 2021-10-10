@@ -4,7 +4,7 @@ Rails:
   Enabled: true
 
 LineLength:
-  Max: 130
+  Max: 100
 
 AllCops:
   Exclude:
@@ -13,5 +13,8 @@ AllCops:
     - 'config/environments/*'
     - 'config/initializers/*'
     - 'db/**/*'
+    - 'Gemfile'
     - 'spec/spec_helper.rb'
     - 'vendor/**/*'
+  NewCops: enable
+

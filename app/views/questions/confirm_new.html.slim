@@ -1,0 +1,17 @@
+.container.solid-deco.mx-auto.p-sm-5.p-2
+  = form_with model: @question, local: true do |f|
+    label.fs-4 タイトル
+    .form-deco.mt-3.px-2.py-3
+      = @question.title
+      = f.hidden_field :title
+    label.fs-4 情報
+    .form-deco.mt-3.px-2.py-3
+      = @question.information
+      = f.hidden_field :information
+    label.fs-4 内容
+    .form-deco.my-3.px-2.py-3
+      = @question.content
+      = f.hidden_field :content
+    .text-end
+      = f.submit "戻る", name: 'back', class: "btn btn-deco"
+      = f.submit "登録", class: 'btn btn-deco'
