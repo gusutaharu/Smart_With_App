@@ -19,3 +19,6 @@ header
           = link_to "サイトについて", "#", class: "nav-link btn", 'aria-current': "page"
         li.nav-item.mx-3
           = link_to "質問をする", new_question_path, class: "nav-link btn", 'aria-current': "page"
+    - if current_user.present?
+      p ログイン中
+      = link_to "user詳細",user_path(current_user)
