@@ -1,3 +1,21 @@
-h1 Users#show
-= @user.name
-= link_to "編集する", edit_user_registration_path
+.container
+  = @user.name
+  br
+  = link_to "編集する", edit_user_registration_path
+  ul#pills-tab.nav.nav-pills.mb-3[role="tablist"]
+    li.nav-item[role="presentation"]
+      a#pills-post-tab.nav-link.btn-deco.me-2.active[data-bs-toggle="pill" href="#pills-post" role="tab" aria-controls="pills-post" aria-selected="true"]
+        | 投稿した質問
+    li.nav-item[role="presentation"]
+      a#pills-favorite-tab.nav-link.me-2.btn-deco[data-bs-toggle="pill" href="#pills-favorite" role="tab" aria-controls="pills-favorite" aria-selected="false"]
+        | 気になる質問
+    li.nav-item[role="presentation"]
+      a#pills-profile-tab.nav-link.btn-deco[data-bs-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"]
+        | 回答済みの質問
+  #pills-tabContent.tab-content
+    #pills-post.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="pills-posted-question-tab"]
+      p 投稿した質問
+    #pills-favorite.tab-pane.fade[role="tabpanel" aria-labelledby="pills-favorite-tab"]
+      p 気になる質問
+    #pills-profile.tab-pane.fade[role="tabpanel" aria-labelledby="pills-profile-tab"]
+      p 回答した質問
