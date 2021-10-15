@@ -1,10 +1,11 @@
 class QuestionsController < ApplicationController
   before_action :set_keyword
+  RECENT_QUESTIONS = 5
 
   def index
     questions = Question.all.order(created_at: :desc)
     @question_top = questions.first
-    @questions = questions[2..6]
+    @questions = Question.where.not(id: @question_top.id).limit(RECENT_QUESTIONS)
   end
 
   def show
@@ -16,12 +17,12 @@ class QuestionsController < ApplicationController
   end
 
   def confirm_new
-    @question = Question.new(question_params)
+    @question = current_user.questions.new(question_params)
     render :new unless @question.valid?
   end
 
   def create
-    @question = Question.new(question_params)
+    @question = current_user.questions.new(question_params)
     if params[:back].present?
       render :new
       return
