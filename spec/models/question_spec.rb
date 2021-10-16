@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Question, type: :model do
   it "20文字以内のタイトルと、情報、内容が設定されている質問を登録できること" do
-    expect(FactoryBot.build(:question)).to be_valid
+    expect(FactoryBot.create(:question)).to be_valid
   end
 
   it "タイトルが設定されていない質問を登録できないこと" do
