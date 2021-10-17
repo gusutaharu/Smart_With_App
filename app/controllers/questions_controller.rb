@@ -1,7 +1,5 @@
 class QuestionsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
-  before_action :set_keyword
-
   RECENT_QUESTIONS = 5
 
   def index
@@ -55,6 +53,11 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @question.destroy
     redirect_to root_url, notice: "質問を削除しました。"
+  end
+
+  def search_results
+    @questions = @q.result.order(created_at: :desc).page(params[:page]).per(5)
+    @key_word = params[:q]["title_or_information_or_content_cont"]
   end
 
   private
