@@ -1,7 +1,8 @@
 .container
   = @user.name
   br
-  = link_to "編集する", edit_user_registration_path
+  - if @user == current_user
+    = link_to "編集する", edit_user_registration_path
   ul#pills-tab.nav.nav-pills.mb-3[role="tablist"]
     li.nav-item[role="presentation"]
       a#pills-post-tab.nav-link.btn-deco.me-2.active[data-bs-toggle="pill" href="#pills-post" role="tab" aria-controls="pills-post" aria-selected="true"]

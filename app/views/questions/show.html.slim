@@ -7,5 +7,6 @@
   label.fs-4 内容
   p.form-deco.mt-3.px-2.py-3 = @question.content
   .text-end
-    = link_to "編集", edit_question_path(@question), class: "btn btn-deco"
-    = link_to "削除", @question, method: :delete, data: { confirm: "この質問を削除します。この操作は取り消せません。よろしいですか？" }, class: "btn btn-deco"
+    - if @question.user == current_user 
+      = link_to "編集", edit_question_path(@question), class: "btn btn-deco"
+      = link_to "削除", @question, method: :delete, data: { confirm: "この質問を削除します。この操作は取り消せません。よろしいですか？" }, class: "btn btn-deco"

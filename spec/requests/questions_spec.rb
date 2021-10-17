@@ -21,14 +21,14 @@ RSpec.describe "Questions", type: :request do
   end
 
   describe "GET /new" do
-    it "正常なレスポンスを返す" do
+    xit "正常なレスポンスを返す" do
       get new_question_path
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET /edit" do
-    it "正常なレスポンスを返す" do
+    xit "正常なレスポンスを返す" do
       get edit_question_path(@question.id)
       expect(response).to have_http_status(:success)
     end

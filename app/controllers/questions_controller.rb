@@ -1,5 +1,7 @@
 class QuestionsController < ApplicationController
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   before_action :set_keyword
+
   RECENT_QUESTIONS = 5
 
   def index
@@ -14,6 +16,10 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    unless user_signed_in?
+      flash[:notice] = "質問を投稿するにはログインが必要です"
+      redirect_to new_user_session_path
+    end
   end
 
   def confirm_new
@@ -51,17 +57,17 @@ class QuestionsController < ApplicationController
     redirect_to root_url, notice: "質問を削除しました。"
   end
 
-  def search_results
-    @search_results = @q.result.order(created_at: :desc).page(params[:page]).per(5)
-  end
-
   private
+
+  def ensure_correct_user
+    @question = Question.find_by(id: params[:id])
+    if @question.user_id != current_user.id
+      flash[:notice] = "権限がありません"
+      redirect_to root_path
+    end
+  end
 
   def question_params
     params.require(:question).permit(:title, :information, :content)
-  end
-
-  def set_keyword
-    @q = Question.ransack(params[:q])
   end
 end
