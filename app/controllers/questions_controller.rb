@@ -1,11 +1,12 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, only: [:confirm_new, :create, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
-  RECENT_QUESTIONS = 5
+  RECENT_QUESTIONS = 6
 
   def index
     questions = Question.all.order(created_at: :desc)
     @question_top = questions.first
-    @questions = Question.where.not(id: @question_top.id).limit(RECENT_QUESTIONS)
+    @questions = questions.limit(RECENT_QUESTIONS).drop(1)
   end
 
   def show
@@ -45,8 +46,11 @@ class QuestionsController < ApplicationController
 
   def update
     @question = Question.find(params[:id])
-    @question.update!(question_params)
-    redirect_to question_url, notice: "質問を更新しました"
+    if @question.update(question_params)
+      redirect_to question_url, notice: "質問を更新しました"
+    else
+      render :new
+    end
   end
 
   def destroy
