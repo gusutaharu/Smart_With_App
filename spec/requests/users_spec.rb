@@ -1,14 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  before do
-    @user = FactoryBot.create(:user)
-  end
+  let(:user) { create(:user) }
 
   describe "GET /show" do
-    it "returns http success" do
-      get user_path(@user.id)
-      expect(response).to have_http_status(:success)
+    subject { get user_path user.id }
+
+    it "ステータスコードが200であること" do
+      is_expected.to eq 200
+    end
+    it "ユーザー名が表示されていること" do
+      subject
+      expect(response.body).to include user.name
     end
   end
 end
