@@ -106,4 +106,22 @@ RSpec.describe "Questions", type: :request do
       end
     end
   end
+
+  describe "DELETE /resource" do
+    subject { delete user_registration_path }
+
+    context "ログインしている場合" do
+      it "ユーザーを削除できること" do
+        sign_in user_a
+        expect { subject }.to change(User, :count).by(-1)
+      end
+    end
+
+    context "ログインしていない場合" do
+      it "リダイレクトされること" do
+        delete user_registration_path
+        is_expected.to redirect_to new_user_session_path
+      end
+    end
+  end
 end
