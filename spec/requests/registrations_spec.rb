@@ -78,14 +78,14 @@ RSpec.describe "Questions", type: :request do
   end
 
   describe "PATCH /resource" do
-    xcontext "ログインしている場合" do
+    context "ログインしている場合" do
       before do
         sign_in user_a
       end
 
-      xcontext "有効な属性の場合" do
+      context "有効な属性の場合" do
         it "名前が更新されていること" do
-          expect { patch user_registration_path user_a, params: { user: user_params } }.to change {
+          expect { patch user_registration_path, params: { user: user_params } }.to change {
             user_a.reload.name
           }.from("user_a").to("new_name")
         end
