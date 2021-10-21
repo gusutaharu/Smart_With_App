@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Questions", type: :request do
+RSpec.describe "UsersRegistrations", type: :request do
   let!(:user_a) { create(:user, name: "user_a") }
   let(:other_user) { create(:user, name: "other_user") }
   let(:user_params) { attributes_for(:user, name: "new_name") }
