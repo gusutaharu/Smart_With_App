@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "UsersSessions", type: :request do
-  let!(:user_a) { create(:user, name: "user_a", email: "user_a@email.com", password: "password") }
-  let(:user_params) { attributes_for(:user, email: "user_a@email.com", password: "password") }
+  let!(:user_a) { create(:user_a) }
+  let(:user_params) { { user: { id: user_a.id, email: user_a.email, password: user_a.password } } }
 
   describe "GET /resource/sign_in" do
     subject { get new_user_session_path }
@@ -22,7 +22,7 @@ RSpec.describe "UsersSessions", type: :request do
   end
 
   describe "POST /resource/sign_in" do
-    subject { post new_user_session_path, params: { user: user_params } }
+    subject { post user_session_url, params: user_params }
 
     context "ログインをしている場合" do
       it "トップページにリダイレクトされること" do
@@ -33,25 +33,30 @@ RSpec.describe "UsersSessions", type: :request do
 
     context "ログインをしていない場合" do
       it "リクエストが成功すること" do
+        subject
         is_expected.to eq 302
       end
     end
   end
 
   describe "DELETE /resource/sign_out" do
-    context "ログインをしている場合" do
-      it "トップページにリダイレクトされること" do
-        sign_in user_a
-        delete destroy_user_session_path
-        expect(response).to redirect_to root_path
-      end
+    subject { delete destroy_user_session_path }
+
+    before do
+      sign_in user_a
     end
 
-    context "ログインをしていない場合" do
-      it "トップページにリダイレクトされないこと" do
-        delete destroy_user_session_path user_a
-        expect(response).not_to redirect_to root_path
-      end
+    it "リクエストが成功すること" do
+      is_expected.to eq 302
+    end
+
+    it "トップページにリダイレクトされること" do
+      is_expected.to redirect_to root_path
+    end
+
+    it "ログアウトされていること" do
+      subject
+      expect(session[:user_id].nil?).to be true
     end
   end
 end

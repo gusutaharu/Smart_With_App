@@ -1,50 +1,61 @@
 require 'rails_helper'
 
 RSpec.describe "UsersRegistrations", type: :request do
-  let!(:user_a) { create(:user, name: "user_a") }
+  let!(:user_a) { create(:user_a) }
   let(:other_user) { create(:user, name: "other_user") }
-  let(:user_params) { attributes_for(:user, name: "new_name") }
-  let(:invalid_user_params) { attributes_for(:user, name: "") }
+  let(:valid_user_params) { attributes_for(:user, name: "new_name") }
+  let(:invalid_user_params) { attributes_for(:user, :blank_name) }
 
   describe "GET /resource/sign_up" do
+    subject { get new_user_registration_path }
+
     context "ログインをしている場合" do
-      it "リダイレクトされること" do
+      it "トップページにリダイレクトされること" do
         sign_in user_a
-        get new_user_registration_path
-        expect(response).to redirect_to root_path
+        is_expected.to redirect_to root_path
       end
     end
 
     context "ログインをしていない場合" do
-      it "ステータスコードが200であること" do
-        get new_user_registration_path
-        expect(response).to have_http_status 200
+      it "リクエストが成功すること" do
+        is_expected.to eq 200
       end
     end
   end
 
   describe "POST /resource" do
+    subject { post user_registration_path, params: { user: user_params } }
+
     context "ログインをしている場合" do
-      it "リダイレクトされること" do
+      let(:user_params) { valid_user_params }
+
+      it "トップページにリダイレクトされること" do
         sign_in user_a
-        post user_registration_path
-        expect(response).to redirect_to root_path
+        is_expected.to redirect_to root_path
       end
     end
 
     context "ログインをしていない場合" do
       context "有効な属性の場合" do
+        let(:user_params) { valid_user_params }
+
+        it "リクエストが成功すること" do
+          is_expected.to eq 302
+        end
+
         it "ユーザーが登録されること" do
-          expect { post user_registration_path, params: { user: user_params } }.to change(User, :count).by(1)
+          expect { subject }.to change(User, :count).by(1)
         end
       end
 
       context "無効な属性の場合" do
+        let(:user_params) { invalid_user_params }
+
         it "ユーザーが登録されないこと" do
-          expect { post user_registration_path, params: { user: invalid_user_params } }.not_to change(User, :count)
+          expect { subject }.not_to change(User, :count)
         end
         it "エラーが表示されること" do
-          post user_registration_path, params: { user: invalid_user_params }
+          subject
           expect(response.body).to include "名前を入力してください"
         end
       end
@@ -55,7 +66,7 @@ RSpec.describe "UsersRegistrations", type: :request do
     subject { get edit_user_registration_path user_a }
 
     context "ログインをしている場合" do
-      it "ステータスコードが200であること" do
+      it "リクエストが成功すること" do
         sign_in user_a
         is_expected.to eq 200
       end
@@ -78,31 +89,42 @@ RSpec.describe "UsersRegistrations", type: :request do
   end
 
   describe "PATCH /resource" do
+    subject { patch user_registration_path, params: { user: user_params } }
+
     context "ログインしている場合" do
       before do
         sign_in user_a
       end
 
       context "有効な属性の場合" do
+        let(:user_params) { valid_user_params }
+
+        it "リクエストが成功すること" do
+          is_expected.to eq 302
+        end
+
         it "名前が更新されていること" do
-          expect { patch user_registration_path, params: { user: user_params } }.to change {
+          expect { subject }.to change {
             user_a.reload.name
           }.from("user_a").to("new_name")
         end
       end
 
       context "無効な属性の場合" do
+        let(:user_params) { invalid_user_params }
+
         it "エラーが表示されること" do
-          patch user_registration_path, params: { user: invalid_user_params }
+          subject
           expect(response.body).to include "名前を入力してください"
         end
       end
     end
 
     context "ログインしていない場合" do
-      it "リダイレクトされてること" do
-        patch user_registration_path, params: { user: invalid_user_params }
-        expect(response).to redirect_to new_user_session_path
+      let(:user_params) { valid_user_params }
+
+      it "リダイレクトされること" do
+        is_expected.to redirect_to new_user_session_path
       end
     end
   end
@@ -110,18 +132,16 @@ RSpec.describe "UsersRegistrations", type: :request do
   describe "DELETE /resource" do
     subject { delete user_registration_path }
 
-    context "ログインしている場合" do
-      it "ユーザーを削除できること" do
-        sign_in user_a
-        expect { subject }.to change(User, :count).by(-1)
-      end
+    before do
+      sign_in user_a
     end
 
-    context "ログインしていない場合" do
-      it "リダイレクトされること" do
-        delete user_registration_path
-        is_expected.to redirect_to new_user_session_path
-      end
+    it "リクエストが成功すること" do
+      is_expected.to eq 302
+    end
+
+    it "ユーザーを削除できること" do
+      expect { subject }.to change(User, :count).by(-1)
     end
   end
 end

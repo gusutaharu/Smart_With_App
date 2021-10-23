@@ -5,8 +5,6 @@ Rails:
 
 LineLength:
   Max: 100
-  Exclude:
-    - 'spec/**/*'
 
 AllCops:
   Exclude:

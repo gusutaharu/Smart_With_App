@@ -6,9 +6,10 @@ RSpec.describe "Users", type: :request do
   describe "GET /show" do
     subject { get user_path user.id }
 
-    it "ステータスコードが200であること" do
+    it "リクエストが成功すること" do
       is_expected.to eq 200
     end
+
     it "ユーザー名が表示されていること" do
       subject
       expect(response.body).to include user.name
