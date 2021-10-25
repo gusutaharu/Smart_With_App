@@ -78,6 +78,10 @@ GEM
     devise-i18n (1.10.0)
       devise (>= 4.8.0)
     diff-lcs (1.4.4)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
@@ -131,7 +135,7 @@ GEM
     pg (1.2.3)
     puma (5.5.2)
       nio4r (~> 2.0)
-    racc (1.5.2)
+    racc (1.6.0)
     rack (2.2.3)
     rack-mini-profiler (2.3.3)
       rack (>= 1.2.0)
@@ -277,7 +281,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.4.2)
+    zeitwerk (2.5.1)
 
 PLATFORMS
   ruby
@@ -287,6 +291,7 @@ DEPENDENCIES
   byebug
   devise
   devise-i18n
+  dotenv-rails
   factory_bot_rails
   html2slim
   jbuilder (~> 2.7)
@@ -313,4 +318,4 @@ RUBY VERSION
    ruby 2.7.4p191
 
 BUNDLED WITH
-   2.2.22
+   2.1.4
