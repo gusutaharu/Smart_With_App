@@ -117,5 +117,17 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
-  config.action_mailer.default_url_options = { host: 'https://smart-with-app.herokuapp.com' }
+  host = 'https://smart-with-app.herokuapp.com'
+  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    port:                587,
+    domain:              'heroku.app',
+    address:             "smtp.sendgrid.net",
+    user_name:           'apikey',
+    password:            ENV['SENDGRID_APIKEY'],
+    authentication:       :plain,
+    enable_starttls_auto: true
+  }
 end
