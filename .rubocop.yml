@@ -5,6 +5,8 @@ Rails:
 
 LineLength:
   Max: 100
+  Exclude:
+    - 'app/uploaders/user_icon_uploader.rb'
 
 AllCops:
   Exclude:
