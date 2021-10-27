@@ -31,6 +31,9 @@ gem 'slim-rails'
 gem 'html2slim'
 gem 'ransack'
 gem 'kaminari'
+gem 'devise'
+gem 'devise-i18n'
+gem 'dotenv-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

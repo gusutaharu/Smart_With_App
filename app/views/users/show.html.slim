@@ -1,0 +1,28 @@
+.container
+  = @user.name
+  br
+  - if @user == current_user
+    = link_to "編集する", edit_user_registration_path
+  ul#pills-tab.nav.nav-pills.mb-3[role="tablist"]
+    li.nav-item[role="presentation"]
+      a#pills-post-tab.nav-link.btn-deco.me-2.active[data-bs-toggle="pill" href="#pills-post" role="tab" aria-controls="pills-post" aria-selected="true"]
+        | 投稿した質問
+    li.nav-item[role="presentation"]
+      a#pills-favorite-tab.nav-link.me-2.btn-deco[data-bs-toggle="pill" href="#pills-favorite" role="tab" aria-controls="pills-favorite" aria-selected="false"]
+        | 気になる質問
+    li.nav-item[role="presentation"]
+      a#pills-answer-tab.nav-link.btn-deco[data-bs-toggle="pill" href="#pills-answer" role="tab" aria-controls="pills-answer" aria-selected="false"]
+        | 回答した質問
+  #pills-tabContent.tab-content
+    #pills-post.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="pills-post-tab"]
+      - @questions.each do |question|
+        .p-2.mt-3
+          .btn-deco.p-2
+            = link_to "#{question.title}", question
+            .d-flex.justify-content-between
+              p 未回答
+              = question.created_at.strftime('%Y/%m/%d')
+    #pills-favorite.tab-pane.fade[role="tabpanel" aria-labelledby="pills-favorite-tab"]
+      p 気になる質問
+    #pills-answer.tab-pane.fade[role="tabpanel" aria-labelledby="pills-answer-tab"]
+      p 回答した質問

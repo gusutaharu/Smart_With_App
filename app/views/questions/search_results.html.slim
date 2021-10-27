@@ -1,11 +1,18 @@
 .container
-  - @search_results.each do |search_result|
+  - if @key_word.empty?
+    = "全ての質問" 
+  - else
+    = "#{@key_word}の検索結果"
+  = " : #{@questions.count} 件"
+  - @questions.each do |question|
     .p-2.mt-3
       .btn-deco.p-2
-        = link_to "#{search_result.title}", search_result
+        = link_to "#{question.title}", question
         .d-flex.justify-content-between
           p 未回答
-          = search_result.created_at.strftime('%Y/%m/%d')
+          = question.created_at.strftime('%Y/%m/%d')
   .mt-3
-    = paginate @search_results
-    = page_entries_info @search_results
+    = paginate @questions
+    = page_entries_info @questions
+  = "#{@key_word}で検索しましたが、質問が見つかりません" unless @questions.present?
+

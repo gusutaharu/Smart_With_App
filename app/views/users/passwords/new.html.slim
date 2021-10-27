@@ -1,0 +1,12 @@
+.container.text-center
+  h2
+    | Forgot your password?
+  = form_with model: @user, url: user_password_path, id: 'new_user', class: 'new_user', local: true do |f|
+    = render "users/shared/error_messages", resource: @user
+    .field
+      = f.label :email
+      br
+      = f.email_field :email, autofocus: true, autocomplete: "email"
+    .actions
+      = f.submit "Send me reset password instructions"
+  = render "users/shared/links"

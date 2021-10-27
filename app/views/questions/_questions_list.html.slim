@@ -8,7 +8,7 @@
         | 回答済みの質問
   #pills-tabContent.tab-content
     #pills-home.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="pills-home-tab"]
-      - questions.each do |question|
+      - @questions.each do |question|
           .form-deco.p-2.mt-3
             .btn-deco.p-1
               = link_to "#{question.title}", question

@@ -1,10 +1,12 @@
 class QuestionsController < ApplicationController
-  before_action :set_keyword
+  before_action :authenticate_user!, only: [:confirm_new, :create, :edit, :update, :destroy]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  RECENT_QUESTIONS = 6
 
   def index
     questions = Question.all.order(created_at: :desc)
     @question_top = questions.first
-    @questions = questions[2..6]
+    @questions = questions.limit(RECENT_QUESTIONS).drop(1)
   end
 
   def show
@@ -13,15 +15,19 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    unless user_signed_in?
+      flash[:notice] = "質問を投稿するにはログインが必要です"
+      redirect_to new_user_session_path
+    end
   end
 
   def confirm_new
-    @question = Question.new(question_params)
+    @question = current_user.questions.new(question_params)
     render :new unless @question.valid?
   end
 
   def create
-    @question = Question.new(question_params)
+    @question = current_user.questions.new(question_params)
     if params[:back].present?
       render :new
       return
@@ -40,8 +46,11 @@ class QuestionsController < ApplicationController
 
   def update
     @question = Question.find(params[:id])
-    @question.update!(question_params)
-    redirect_to question_url, notice: "質問を更新しました"
+    if @question.update(question_params)
+      redirect_to question_url, notice: "質問を更新しました"
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -51,16 +60,21 @@ class QuestionsController < ApplicationController
   end
 
   def search_results
-    @search_results = @q.result.order(created_at: :desc).page(params[:page]).per(5)
+    @questions = @q.result.order(created_at: :desc).page(params[:page]).per(5)
+    @key_word = params[:q]["title_or_information_or_content_cont"]
   end
 
   private
 
-  def question_params
-    params.require(:question).permit(:title, :information, :content)
+  def ensure_correct_user
+    @question = Question.find_by(id: params[:id])
+    if @question.user_id != current_user.id
+      flash[:notice] = "権限がありません"
+      redirect_to root_path
+    end
   end
 
-  def set_keyword
-    @q = Question.ransack(params[:q])
+  def question_params
+    params.require(:question).permit(:title, :information, :content)
   end
 end

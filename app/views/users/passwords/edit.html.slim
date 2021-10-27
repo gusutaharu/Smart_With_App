@@ -1,0 +1,23 @@
+.container.text-center
+  h2
+    | Change your password
+  = form_with model: @user, url: user_password_path, id: 'new_user', class: 'new_user', method: "PUT", local: true do |f|
+    = render "users/shared/error_messages", resource: @user
+    = f.hidden_field :reset_password_token
+    .field
+      = f.label :password, "New password"
+      br
+      - if @minimum_password_length
+        em
+          | (
+          = @minimum_password_length
+          |  characters minimum)
+        br
+      = f.password_field :password, autofocus: true, autocomplete: "new-password"
+    .field
+      = f.label :password_confirmation, "Confirm new password"
+      br
+      = f.password_field :password_confirmation, autocomplete: "new-password"
+    .actions
+      = f.submit "Change my password"
+  = render "users/shared/links"
