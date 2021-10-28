@@ -1,5 +1,7 @@
 .container
   = @user.name
+  - if @user.user_icon?
+    = image_tag @user.user_icon.url
   br
   - if @user == current_user
     = link_to "編集する", edit_user_registration_path

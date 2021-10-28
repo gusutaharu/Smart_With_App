@@ -5,6 +5,10 @@
   = form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
     = render "users/shared/error_messages", resource: @user
     .field
+      = f.label :user_icon
+      br
+      = f.file_field :user_icon
+    .field
       = f.label :name
       br
       = f.text_field :name, autofocus: true
