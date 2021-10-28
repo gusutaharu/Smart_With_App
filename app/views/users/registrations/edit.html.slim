@@ -7,6 +7,11 @@
     .field
       = f.label :user_icon
       br
+      - if @user.user_icon?
+        = @user.user_icon
+      - else
+        span.material-icons.md-60.text-secondary account_circle
+      br
       = f.file_field :user_icon
     .field
       = f.label :name
