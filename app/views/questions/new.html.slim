@@ -13,5 +13,7 @@
     .form-group.mb-4
       = f.label "内容"
       = f.text_area :content, rows: 10, class: "form-control form-deco mt-3 px-2 py-3", id: "question_content"
+    .form-group.mb-4
+      = f.file_field :question_images, multiple: true
     .text-end
       = f.submit nil, class: "btn border-light bg-white confirm-btn px-5", value: "確認"
