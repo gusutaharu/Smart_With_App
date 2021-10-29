@@ -35,6 +35,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'dotenv-rails'
 gem 'carrierwave','>= 2.2.1'
+gem 'pry-byebug'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
