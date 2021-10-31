@@ -28,11 +28,6 @@ class QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.new(question_params)
-    if params[:back].present?
-      render :new
-      return
-    end
-
     if @question.save
       redirect_to questions_url, notice: "質問が作成されました"
     else

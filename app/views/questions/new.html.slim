@@ -3,7 +3,7 @@
     - @question.errors.full_messages.each do |message|
       li= message
 .container.solid-deco.mx-auto.p-sm-5.p-2.fs-4
-  = form_with model: @question, local: true, url: confirm_new_question_path do |f|
+  = form_with model: @question, local: true do |f|
     .form-group.mb-5
       = f.label "タイトル"
       = f.text_field :title, class: "form-control form-deco mt-3 px-2 py-3", id: "question_name"

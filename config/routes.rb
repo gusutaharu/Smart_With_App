@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   }
   resources :users, only: [:show]
   resources :questions do
-    post :confirm, action: :confirm_new, on: :new
     get :search_results, on: :collection
   end
 end
