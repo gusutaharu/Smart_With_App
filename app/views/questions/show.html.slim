@@ -1,5 +1,11 @@
-.container.solid-deco.mx-auto.p-sm-5.p-2
-  p = link_to @question.user.name, user_path(@question.user)
+.container.solid-deco.mx-auto.p-sm-5.p-2 
+  = link_to user_path(@question.user) do
+    - if current_user.user_icon?
+      = image_tag current_user.user_icon.icon.url, class: 'rounded-circle me-2',saize: "48x48"
+    - else
+      span.material-icons.md-48.text-secondary.me-2 account_circle
+    = @question.user.name
+  br
   label.fs-4 タイトル
   p.form-deco.mt-3.px-2.py-3 = @question.title
   label.fs-4 情報

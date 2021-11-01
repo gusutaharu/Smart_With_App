@@ -11,9 +11,9 @@ header
       ul.navbar-nav.mx-5.mt-3.p-4.btn-deco.rounded-pill.text-center
         - if user_signed_in?
           li.nav-item.ms-3
-            = link_to user_path(current_user),class: "d-flex pt-1" do
+            = link_to user_path(current_user),class: "d-flex mt-1" do
               - if current_user.user_icon?
-                = image_tag current_user.user_icon.url
+                = image_tag current_user.user_icon.icon.url, class: 'rounded-circle',size: "36x36"
               - else
                 span.material-icons.md-36.text-secondary account_circle
           li.nav-item.me-3
