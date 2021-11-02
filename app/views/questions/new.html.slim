@@ -15,5 +15,10 @@
       = f.text_area :content, rows: 10, class: "form-control form-deco mt-3 px-2 py-3", id: "question_content"
     .form-group.mb-4
       = f.file_field :question_images, multiple: true
+    .img_preview
+      img#preview_0
+      img#preview_1
+      img#preview_2
+      img#preview_3
     .text-end
       = f.submit nil, class: "btn border-light bg-white confirm-btn px-5", value: "確認"

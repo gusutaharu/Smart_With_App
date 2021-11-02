@@ -16,6 +16,11 @@
     .form-group.mb-4
       - question.question_images.each do |image|
         = image_tag image.url
+      .img_preview
+        img#preview_0
+        img#preview_1
+        img#preview_2
+        img#preview_3
       = f.file_field :question_images, multiple: true
     .text-end
       = f.submit nil, class: "btn border-light bg-white confirm-btn px-5", value: "確認"
