@@ -1,0 +1,20 @@
+.modal.fade#exampleModal tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5.modal-title#exampleModalLabel
+          | 入力内容をご確認ください
+        button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
+      .modal-body
+        p タイトル
+        #output-title
+        p 情報
+        #output-information
+        p 内容
+        #output-content
+        = render partial: "preview"
+      .modal-footer
+        button type="button" class="btn btn-deco" data-bs-dismiss="modal"
+          | 入力に戻る
+        .text-end
+          = f.submit nil, class: "btn border-light bg-white confirm-btn px-5", value: "投稿"
