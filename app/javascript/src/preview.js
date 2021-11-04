@@ -24,7 +24,8 @@ $(document).on('turbolinks:load', function() {
 
         function finisher(i,e){
           return function(e){
-          $(`.preview_${i}`).attr('src', e.target.result);
+            $(`.light_box_${i}`).attr({href: e.target.result,'data-lightbox': 'image'});
+            $(`.preview_${i}`).attr('src', e.target.result);
           }
         }
       }

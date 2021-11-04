@@ -12,7 +12,15 @@
         #output-information
         p 内容
         #output-content
-        = render partial: "preview"
+        .img_preview
+          a.light_box_0
+            img.preview_0
+          a.light_box_1
+            img.preview_1
+          a.light_box_2
+            img.preview_2
+          a.light_box_3
+            img.preview_3
       .modal-footer
         button type="button" class="btn btn-deco" data-bs-dismiss="modal"
           | 入力に戻る
