@@ -1,3 +1,5 @@
+- content_for(:body_attributes) do
+  data-turbolinks="false"
 - if @question.errors.present?
   ul#error_explanation.text-center
     - @question.errors.full_messages.each do |message|
@@ -16,6 +18,7 @@
     .form-group.mb-4
       = f.file_field :question_images, multiple: true
     = render partial: "preview"
+    = render partial: "img_zoom"
     = render partial: "form_modal", locals: { f: f }
     .text-end
       button.btn.btn-deco type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"

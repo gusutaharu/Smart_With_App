@@ -10,6 +10,7 @@ import "channels"
 import "../styles/application.scss";
 import "../src/preview.js";
 import "../src/form_data.js";
+import "../src/img_zoom.js";
 
 require('bootstrap');
 

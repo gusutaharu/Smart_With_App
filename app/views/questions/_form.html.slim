@@ -15,8 +15,9 @@
       = f.text_area :content, rows: 10, class: "form-control form-deco mt-3 px-2 py-3", id: "question_content"
     .form-group.mb-4
       - question.question_images.each do |image|
-        = image_tag image.url
+        = link_to image_tag(image.url), "", class: "zoom"
       = f.file_field :question_images, multiple: true
       = render partial: "preview"
+      = render partial: "img_zoom"
     .text-end
       = f.submit nil, class: "btn border-light bg-white confirm-btn px-5", value: "確認"

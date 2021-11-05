@@ -14,7 +14,8 @@
   p.form-deco.mt-3.px-2.py-3 = @question.content
   .my-3.px-2.py-3
     - @question.question_images.each do |image|
-      = image_tag image.url
+      = link_to image_tag(image.url), "", class: "zoom"
+      = render partial: "img_zoom"
   .text-end
     - if @question.user == current_user 
       = link_to "編集", edit_question_path(@question), class: "btn btn-deco"

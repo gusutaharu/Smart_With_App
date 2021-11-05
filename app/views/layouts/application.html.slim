@@ -9,9 +9,9 @@ html
     = stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons', media: 'all'
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-    script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"
-    link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.css"
   body
+    - if content_for?(:body_attributes)
+      = yield(:body_attributes)
     = render "layouts/header", q: @q
     .main-wrapper.bg-light.p-1.p-sm-5
       - if flash.notice.present?
