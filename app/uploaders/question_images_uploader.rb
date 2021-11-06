@@ -21,8 +21,8 @@ class QuestionImagesUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-    include CarrierWave::MiniMagick
-    process resize_to_limit: [800, 600]
+  include CarrierWave::MiniMagick
+  process resize_to_limit: [800, 600]
 
   # Create different versions of your uploaded files:
   # version :thumb do

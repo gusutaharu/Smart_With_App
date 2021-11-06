@@ -6,12 +6,13 @@
           | 入力内容をご確認ください
         button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
       .modal-body
-        p タイトル
-        #output-title
-        p 情報
-        #output-information
-        p 内容
-        #output-content
+        p.fs-5 画面のスクリーンショットなど画像を投稿する際、個人情報が映り込んでいる場合がございます。必ずご確認ください。
+        h5 タイトル
+        p#output-title
+        h5 情報
+        p#output-information
+        h5 内容
+        p#output-content
         = render partial: "preview"
         = render partial: "img_zoom"
       .modal-footer
