@@ -16,6 +16,7 @@
     .form-group.mb-4
       - question.question_images.each do |image|
         = link_to image_tag(image.url), "", class: "zoom"
+        = f.hidden_field :question_images, multiple: true, value: image.identifier, id: "question_existing_images"
       = f.file_field :question_images, multiple: true
       = render partial: "preview"
       = render partial: "img_zoom"
