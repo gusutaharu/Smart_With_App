@@ -14,10 +14,11 @@
       = f.label "内容"
       = f.text_area :content, rows: 10, class: "form-control form-deco mt-3 px-2 py-3", id: "question_content"
     .form-group.mb-4
+      = f.file_field :question_images, multiple: true
+      span 画像はjpg、png、gifのいずれかの形式で一枚のサイズが10MB以内
       - question.question_images.each do |image|
         = link_to image_tag(image.url), "", class: "zoom"
         = f.hidden_field :question_images, multiple: true, value: image.identifier, id: "question_existing_images"
-      = f.file_field :question_images, multiple: true
       = render partial: "preview"
       = render partial: "img_zoom"
     .text-end

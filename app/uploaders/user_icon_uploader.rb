@@ -25,24 +25,24 @@ class UserIconUploader < CarrierWave::Uploader::Base
   # end
 
   include CarrierWave::MiniMagick
-  process resize_to_fit: [100, 100]
+  process resize_to_fill: [100, 100, "Center"]
 
   version :icon do
-    process resize_to_fit: [48, 48]
+    process resize_to_fill: [48, 48, "Center"]
   end
 
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  # def extension_allowlist
-  #   %w(jpg jpeg gif png)
-  # end
+  def extension_allowlist
+    %w(jpg jpeg gif png)
+  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
   #   "something.jpg" if original_filename
   # end
-  def default_url
-    "default_icon.svg"
+  def size_range
+    1..5.megabytes
   end
 end
