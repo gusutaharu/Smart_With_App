@@ -44,47 +44,6 @@ RSpec.describe "Questions", type: :request do
     end
   end
 
-  describe "POST /confirm_new" do
-    subject { post confirm_new_question_path, params: { question: question_params } }
-
-    context "ログインしている場合" do
-      before do
-        sign_in user_a
-      end
-
-      context "有効な属性の場合" do
-        let(:question_params) { valid_question_params }
-
-        it "リクエストが成功すること" do
-          is_expected.to eq 200
-        end
-
-        it "入力した質問が受け取れていること" do
-          subject
-          expect(response.body).to include "新しいタイトル"
-        end
-      end
-
-      context "無効な属性の場合" do
-        let(:question_params) { invalid_question_params }
-
-        it "有効な属性の入力を求めるエラーが表示されること" do
-          subject
-          expect(response.body).to include "Titleを入力してください"
-        end
-      end
-    end
-
-    context "ログインしていない場合" do
-      let(:question_params) { valid_question_params }
-
-      it "ログインページにリダイレクすること" do
-        subject
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-  end
-
   describe "POST /create" do
     subject { post questions_path, params: { question: question_params } }
 

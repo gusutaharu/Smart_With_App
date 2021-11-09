@@ -12,6 +12,10 @@
     .form-deco.my-3.px-2.py-3
       = @question.content
       = f.hidden_field :content
+    .my-3.px-2.py-3
+      - @question.question_images.each do |image|
+        = image_tag image.url
+      = f.hidden_field :question_images, multiple: true
     .text-end
       = f.submit "戻る", name: 'back', class: "btn btn-deco"
       = f.submit "登録", class: 'btn btn-deco'

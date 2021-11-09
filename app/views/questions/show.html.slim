@@ -1,11 +1,21 @@
-.container.solid-deco.mx-auto.p-sm-5.p-2
-  p = link_to @question.user.name, user_path(@question.user)
+.container.solid-deco.mx-auto.p-sm-5.p-2 
+  = link_to user_path(@question.user) do
+    - if @question.user.user_icon.present?
+      = image_tag @question.user.user_icon.icon.url, class: 'rounded-circle me-2',saize: "48x48"
+    - else
+      span.material-icons.md-48.text-secondary.me-2 account_circle
+    = @question.user.name
+  br
   label.fs-4 タイトル
   p.form-deco.mt-3.px-2.py-3 = @question.title
   label.fs-4 情報
   p.form-deco.mt-3.px-2.py-3 = @question.information
   label.fs-4 内容
   p.form-deco.mt-3.px-2.py-3 = @question.content
+  .my-3.px-2.py-3
+    - @question.question_images.each do |image|
+      = link_to image_tag(image.url), "", class: "zoom"
+      = render partial: "img_zoom"
   .text-end
     - if @question.user == current_user 
       = link_to "編集", edit_question_path(@question), class: "btn btn-deco"

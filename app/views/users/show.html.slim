@@ -1,4 +1,9 @@
 .container
+  - if @user.user_icon?
+    = image_tag @user.user_icon.url, class:'rounded-circle',size: "96x96"
+  - else
+    span.material-icons.md-96.text-secondary account_circle
+  br
   = @user.name
   br
   - if @user == current_user

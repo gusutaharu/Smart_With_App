@@ -1,9 +1,18 @@
 .container.text-center
-  h2
-    | Edit 
-    = resource_name.to_s.humanize
+  h2 ユーザー設定
   = form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
     = render "users/shared/error_messages", resource: @user
+    .field
+      - if @user.user_icon?
+        = image_tag @user.user_icon.url, class: 'rounded-circle mb-2',size: "96x96"
+      - else
+        span.material-icons.md-96.text-secondary account_circle
+      p 現在の画像
+      #icon_preview
+        img.rounded-circle
+        p
+      = f.file_field :user_icon
+      p 画像はjpg、png、gifのいずれかの形式でサイズが5MB以内
     .field
       = f.label :name
       br

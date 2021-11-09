@@ -28,11 +28,6 @@ class QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.new(question_params)
-    if params[:back].present?
-      render :new
-      return
-    end
-
     if @question.save
       redirect_to questions_url, notice: "質問が作成されました"
     else
@@ -75,6 +70,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :information, :content)
+    params.require(:question).permit(:title, :information, :content, { question_images: [] })
   end
 end
