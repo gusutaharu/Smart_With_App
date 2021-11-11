@@ -1,5 +1,3 @@
-- content_for(:body_attributes) do
-  data-turbolinks="false"
 - if @question.errors.present?
   ul#error_explanation.text-center
     - @question.errors.full_messages.each do |message|
