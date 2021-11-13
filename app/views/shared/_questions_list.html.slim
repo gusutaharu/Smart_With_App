@@ -1,0 +1,9 @@
+- questions.each do |question|
+  .p-2.mt-3
+    .btn-deco.p-2.d-flex.justify-content-between
+      .d-flex.flex-column
+        = link_to "#{question.title}", question
+        p 未回答
+      .d-flex.flex-column.text-end
+        = render "shared/interest", question: question
+        = question.created_at.strftime('%Y/%m/%d')

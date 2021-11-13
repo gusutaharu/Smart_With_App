@@ -20,15 +20,7 @@
         | 回答した質問
   #pills-tabContent.tab-content
     #pills-post.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="pills-post-tab"]
-      - @questions.each do |question|
-        .p-2.mt-3
-          .btn-deco.p-2.d-flex.justify-content-between
-            .d-flex.flex-column
-              = link_to "#{question.title}", question
-              p 未回答
-            .d-flex.flex-column.text-end
-              = render "shared/interest", question: question
-              = question.created_at.strftime('%Y/%m/%d')
+      = render "shared/questions_list", questions: @questions
     #pills-favorite.tab-pane.fade[role="tabpanel" aria-labelledby="pills-favorite-tab"]
       p 気になる質問
     #pills-answer.tab-pane.fade[role="tabpanel" aria-labelledby="pills-answer-tab"]

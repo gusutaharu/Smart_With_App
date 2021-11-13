@@ -4,15 +4,7 @@
   - else
     = "#{@key_word}の検索結果"
   = " : #{@questions.count} 件"
-  - @questions.each do |question|
-    .p-2.mt-3
-      .btn-deco.p-2.d-flex.justify-content-between
-        .d-flex.flex-column
-          = link_to "#{question.title}", question
-          p 未回答
-        .d-flex.flex-column.text-end
-          = render "shared/interest", question: question
-          = question.created_at.strftime('%Y/%m/%d')
+  = render "shared/questions_list", questions: @questions
   .mt-3
     = paginate @questions
     = page_entries_info @questions
