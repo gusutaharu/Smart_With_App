@@ -1,4 +1,5 @@
 class Interest < ApplicationRecord
-  validates :user_id, { presence: true }
-  validates :post_id, { presence: true }
+  belongs_to :user
+  belongs_to :question
+  validates_uniqueness_of :question_id, scope: :user_id
 end

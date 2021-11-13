@@ -1,0 +1,7 @@
+- if user_signed_in?
+  - if Interest.find_by(user_id: current_user.id, question_id: question.id)
+    = link_to "気になるを解除する", question_interests_path(question), method: :delete
+  - else
+    = link_to "気になる", question_interests_path(question), method: :post
+- else
+  = link_to "登録することで'気になる機能'が利用できます", new_user_registration_path
