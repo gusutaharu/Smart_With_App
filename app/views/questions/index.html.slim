@@ -2,7 +2,7 @@
   .row
     h2.text-secondary.fw-bold 新着の質問
     .col-md.me-sm-4.p-4
-      - if @question_top
+      - if @question_top.present?
         .my-3
           label.btn-deco.rounded-pill.px-3.py-1.my-3 タイトル
           .btn-deco.p-2
@@ -15,18 +15,21 @@
           label.btn-deco.rounded-pill.px-3.py-1.my-3 内容
           .btn-deco.p-2
             = @question_top.content
-        .text-end
+        .d-flex.justify-content-between
+          = render "shared/interest", question: @question_top
           = link_to "この質問の詳細へ", @question_top, class: "btn btn-deco"
       - else
         p  質問が投稿されていません
-    - if @questions
+    - if @questions.present?
       .col-md.solid-deco
         - @questions.each do |question|
           .form-deco.p-2.my-3
-            .btn-deco.p-1
-              = link_to "#{question.title}", question
-              .d-flex.justify-content-between
+            .btn-deco.p-2.d-flex.justify-content-between
+              .d-flex.flex-column
+                = link_to "#{question.title}", question
                 p 未回答
+              .d-flex.flex-column.text-end
+                = render "shared/interest", question: question
                 = question.created_at.strftime('%Y/%m/%d')
-- if @questions
+- if @questions.present?
   = render "questions_list", questions: @questions
