@@ -6,12 +6,9 @@ html
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons', media: 'all'
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    - if content_for?(:body_attributes)
-      = yield(:body_attributes)
     = render "layouts/header", q: @q
     .main-wrapper.bg-light.p-1.p-sm-5
       - if flash.notice.present?

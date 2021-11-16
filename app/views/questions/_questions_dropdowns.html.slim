@@ -8,18 +8,6 @@
         | 回答済みの質問
   #pills-tabContent.tab-content
     #pills-home.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="pills-home-tab"]
-      - @questions.each do |question|
-          .form-deco.p-2.mt-3
-            .btn-deco.p-1
-              = link_to "#{question.title}", question
-              .d-flex.justify-content-between
-                p 未回答
-                = question.created_at.strftime('%Y/%m/%d')
+      = render "shared/questions_list", questions: @questions
     #pills-profile.tab-pane.fade[role="tabpanel" aria-labelledby="pills-profile-tab"]
-      - questions.each do |question|
-          .form-deco.p-2.mt-3
-            .btn-deco.p-1
-              = link_to "#{question.title}", question
-              .d-flex.justify-content-between
-                p 未回答
-                = question.created_at.strftime('%Y/%m/%d')
+      = render "shared/questions_list", questions: @questions

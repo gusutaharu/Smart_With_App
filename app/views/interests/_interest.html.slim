@@ -1,0 +1,10 @@
+  - if user_signed_in?
+    - if Interest.find_by(user_id: current_user.id, question_id: question.id)
+      = link_to question_interests_path(question), method: :delete, remote: true do
+        span.material-icons grade
+    - else
+      = link_to question_interests_path(question), method: :post, remote: true do
+        span.material-icons.text-secondary star_border
+  - else
+    = link_to new_user_registration_path do
+      span.material-icons.text-secondary star_border
