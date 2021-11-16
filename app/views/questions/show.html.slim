@@ -17,6 +17,8 @@
       = link_to image_tag(image.url), "", class: "zoom"
       = render partial: "img_zoom"
   .text-end
+    div class="interest-#{@question.id}"
+      = render "interests/interest", question: @question
     - if @question.user == current_user 
       = link_to "編集", edit_question_path(@question), class: "btn btn-deco"
       = link_to "削除", @question, method: :delete, data: { confirm: "この質問を削除します。この操作は取り消せません。よろしいですか？" }, class: "btn btn-deco"

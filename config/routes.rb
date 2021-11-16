@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :questions do
     get :search_results, on: :collection
+    resource :interests, only: [:create, :destroy]
   end
 end
