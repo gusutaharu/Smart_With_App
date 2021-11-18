@@ -1,0 +1,7 @@
+.solid-deco.mx-auto.p-sm-5.p-2.fs-4
+  = form_with model: [question, answer],local: false do |f|
+    .form-group
+      = f.label "回答を投稿する"
+      = f.text_area :content, rows: 10, class: "form-control form-deco"
+    .text-end
+      = f.submit "投稿する", class: "btn btn-deco"

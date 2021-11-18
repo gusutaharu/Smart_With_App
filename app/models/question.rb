@@ -2,6 +2,7 @@ class Question < ApplicationRecord
   IMAGES_NUMBER_LIMIT = 4
   belongs_to :user
   has_many :interests, dependent: :destroy
+  has_many :answers, dependent: :destroy
   mount_uploaders :question_images, QuestionImagesUploader
   validates :title, presence: true, length: { maximum: 20 }
   validates :information, presence: true

@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   resources :questions do
     get :search_results, on: :collection
     resource :interests, only: [:create, :destroy]
+    resources :answers, only: [:create, :destroy]
   end
 end

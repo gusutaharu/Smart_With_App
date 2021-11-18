@@ -1,0 +1,2 @@
+$("#answers-area").html("<%= j(render 'index', { answers: @answer.question.answers.order(created_at: :desc)}) %>");
+$("textarea").val('')

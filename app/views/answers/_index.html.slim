@@ -1,0 +1,12 @@
+.my-3
+  h1.my-4 回答一覧
+  - if answers.present?
+    - answers.each do |answer|
+      - unless answer.id.nil?
+        .solid-deco.m-3.p-sm-5.p-2
+          = answer.user.name
+          = answer.content
+          - if answer.user == current_user
+            = link_to "削除", question_answer_path(answer.question.id, answer.id), method: :delete, class: "btn btn-deco", remote: true
+  - else
+    h3 回答はまだありません
