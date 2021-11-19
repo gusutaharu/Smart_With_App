@@ -14,7 +14,7 @@
     p.form-deco.mt-3.px-2.py-3 = @question.information
     label.fs-4 内容
     p.form-deco.mt-3.px-2.py-3 = @question.content
-    .my-3.px-2.py-3
+    .show-img.my-3.px-2.py-3
       - @question.question_images.each do |image|
         = link_to image_tag(image.url), "", class: "zoom"
         = render partial: "img_zoom"
