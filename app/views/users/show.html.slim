@@ -23,8 +23,11 @@
       = render "shared/questions_list", questions: @questions
     #pills-favorite.tab-pane.fade[role="tabpanel" aria-labelledby="pills-favorite-tab"]
       - if  @interesting_questions.present?
-        = render "shared/questions_list", questions:  @interesting_questions
+        = render "shared/questions_list", questions: @interesting_questions
       - else
         | 気になる質問はまだありません
     #pills-answer.tab-pane.fade[role="tabpanel" aria-labelledby="pills-answer-tab"]
-      p 回答した質問
+      - if  @interesting_questions.present?
+        = render "shared/questions_list", questions: @answered_questions
+      - else
+        | 回答した質問はまだありません
