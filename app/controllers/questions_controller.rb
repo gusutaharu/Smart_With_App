@@ -7,6 +7,9 @@ class QuestionsController < ApplicationController
     questions = Question.all.order(created_at: :desc)
     @question_top = questions.first
     @questions = questions.limit(RECENT_QUESTIONS).drop(1)
+    answers = Answer.all.order(created_at: :desc).pluck(:question_id).uniq
+    @answered_questions = Question.find(answers)
+    @unanswered_questions = Question.where.not(id: answers).order(created_at: :desc)
   end
 
   def show
