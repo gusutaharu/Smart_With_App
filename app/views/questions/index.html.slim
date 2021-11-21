@@ -15,6 +15,7 @@
           label.btn-deco.rounded-pill.px-3.py-1.my-3 内容
           .btn-deco.p-2
             = @question_top.content
+        = render "answers/answer_count", question: @question_top
         .d-flex.justify-content-between
           div class="interest-#{@question_top.id}"
             = render "interests/interest", question: @question_top
@@ -28,7 +29,7 @@
             .btn-deco.p-2.d-flex.justify-content-between
               .d-flex.flex-column
                 = link_to "#{question.title}", question
-                p 未回答
+                = render "answers/answer_count", question: question
               .d-flex.flex-column.text-end
                 div class="interest-#{question.id}"
                   = render "interests/interest", question: question

@@ -1,0 +1,6 @@
+.d-flex.answer_count
+  - if question.answers.present?
+    p 回答
+    = question.answers.count
+  - else
+    p 未回答

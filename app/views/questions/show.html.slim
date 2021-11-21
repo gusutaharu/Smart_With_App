@@ -18,6 +18,7 @@
       - @question.question_images.each do |image|
         = link_to image_tag(image.url), "", class: "zoom"
         = render partial: "img_zoom"
+    = render "answers/answer_count", question: @question
     .text-end
       div class="interest-#{@question.id}"
         = render "interests/interest", question: @question
