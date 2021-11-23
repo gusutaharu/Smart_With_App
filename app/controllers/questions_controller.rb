@@ -16,6 +16,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @answer = Answer.new
     @answers = @question.answers.order(created_at: :desc)
+    @answer_reply = @question.answers.new
   end
 
   def new

@@ -1,0 +1,13 @@
+= form_with model: [question, answer_reply], local: false do |f|
+  .form-group
+    = f.label "投稿する"
+    = f.text_area :content, class: "form-control form-deco"
+    = f.hidden_field :parent_id, value: answer.id
+  .form-group
+    = f.file_field :images, multiple: true
+    br
+      span 画像はjpg、png、gifのいずれかの形式で一枚のサイズが10MB以内
+    = render partial: "questions/preview"
+    = render partial: "questions/img_zoom"
+  .text-end
+    = f.submit "投稿する", class: "btn btn-deco"
