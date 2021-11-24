@@ -27,7 +27,7 @@
       - else
         | 気になる質問はまだありません
     #pills-answer.tab-pane.fade[role="tabpanel" aria-labelledby="pills-answer-tab"]
-      - if  @interesting_questions.present?
+      - if  @answered_questions.present?
         = render "shared/questions_list", questions: @answered_questions
       - else
         | 回答した質問はまだありません

@@ -1,6 +1,6 @@
 .d-flex.answer_count
-  - if question.answers.present?
+  - if question.answers.where(parent_id: nil).present?
     p 回答
-    = question.answers.count
+    = question.answers.where(parent_id: nil).count
   - else
     p 未回答
