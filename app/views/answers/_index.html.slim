@@ -1,5 +1,6 @@
 .my-3
-  h1.my-4 回答一覧
+  .my-4 
+    h1 回答数 #{ answers.where(parent_id: nil).count }件
   - if answers.present?
     - answers.where(parent_id: nil).each do |answer|
       .row.solid-deco.m-3.my-5.px-3.py-5
