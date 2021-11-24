@@ -15,7 +15,7 @@ class AnswersController < ApplicationController
 
   def destroy
     @question = Question.find(params[:question_id])
-    @answer_reply = @question.answers
+    @answer_reply = @question.answers.new
     @answer = Answer.find(params[:id])
     @answer.destroy
     render :answer
