@@ -22,6 +22,9 @@
               = image_tag image.url, width: '100px', height: 'auto', class: "rounded ms-5"
       .row.justify-content-end
         = render "answers/reply_index", question: question, answer: answer
-        = render "answers/reply_form", question: question, answer: answer, answer_reply: answer_reply
+        - if user_signed_in?
+          = render "answers/reply_form", question: question, answer: answer, answer_reply: answer_reply
+        - else
+          p 回答へのコメントにはログインが必要です
   - else
     h3 回答はまだありません

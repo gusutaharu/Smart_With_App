@@ -27,4 +27,7 @@
         = link_to "削除", @question, method: :delete, data: { confirm: "この質問を削除します。この操作は取り消せません。よろしいですか？" }, class: "btn btn-deco"
   #answers-area
     = render "answers/index", question: @question, answers: @answers, answer_reply: @answer_reply
-  = render "answers/form", question: @question, answer: @answer
+  - if user_signed_in?
+    = render "answers/form", question: @question, answer: @answer
+  - else
+    p 回答にログインが必要です
