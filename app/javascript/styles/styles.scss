@@ -79,6 +79,10 @@ a {
   width: 50%;
 }
 
+.show-img img{
+  width: 50%;
+}
+
 .img-zoom {
   position: fixed;
   top: 0;
@@ -99,6 +103,11 @@ a {
   right: 0;
   margin-right: auto;
   margin-left: auto;
+}
+
+.bigimg img{
+  width: 80%;
+  height: 80%;
 }
 
 #icon_big {

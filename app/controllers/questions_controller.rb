@@ -4,13 +4,19 @@ class QuestionsController < ApplicationController
   RECENT_QUESTIONS = 6
 
   def index
-    questions = Question.all.order(created_at: :desc)
+    questions = Question.all.recent
     @question_top = questions.first
     @questions = questions.limit(RECENT_QUESTIONS).drop(1)
+    answers = Answer.all.recent.pluck(:question_id).uniq
+    @answered_questions = Question.find(answers)
+    @unanswered_questions = Question.where.not(id: answers).recent
   end
 
   def show
     @question = Question.find(params[:id])
+    @answer = Answer.new
+    @answers = @question.answers.recent
+    @answer_reply = @question.answers.new
   end
 
   def new
@@ -55,7 +61,7 @@ class QuestionsController < ApplicationController
   end
 
   def search_results
-    @questions = @q.result.order(created_at: :desc).page(params[:page]).per(5)
+    @questions = @q.result.recent.page(params[:page]).per(5)
     @key_word = params[:q]["title_or_information_or_content_cont"]
   end
 
