@@ -1,4 +1,6 @@
 .my-3
+  - if flash.notice.present?
+    .alert.alert-success= flash.notice
   .my-4 
     h1 回答数 #{ answers.where(parent_id: nil).count }件
   - if answers.present?

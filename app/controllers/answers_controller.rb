@@ -10,8 +10,7 @@ class AnswersController < ApplicationController
       flash.now[:notice] = "投稿に成功しました"
       render :answer
     else
-      flash.now[:alert] = "投稿に失敗しました"
-      render :answer
+      render :error
     end
   end
 
