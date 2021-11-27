@@ -32,11 +32,12 @@ body {
 }
 
 a {
-  text-decoration: none; 
+  text-decoration: none;
+  color: rgba(0,0,0,0.7);
 }
 
 .solid-deco {
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: #fdfdfd;
   box-shadow: -2px -2px 5px rgba(255,255,255,1),
               3px 3px 5px rgba(0,0,0,.07);
@@ -51,6 +52,7 @@ a {
 }
 
 .btn-deco {
+  border-radius: 5px;
   background-color: #fdfdfd;
   box-shadow: -2px -2px 5px rgba(255,255,255,1),
               3px 3px 5px rgba(0,0,0,.07);
@@ -114,4 +116,13 @@ a {
   width: 96px;
   height: 96px;
   object-fit: cover;
+}
+
+.c-1 {
+  border:5px solid #690074;
+  border-image:linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  border-image-slice:1;
+  background-color: #fdfdfd;
+  box-shadow: -2px -2px 5px rgba(255,255,255,1),
+              3px 3px 5px rgba(0,0,0,.07);
 }

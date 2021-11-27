@@ -1,37 +1,21 @@
-.container.mx-auto.p-sm-4.p-3
-  .row
-    h2.text-secondary.fw-bold 新着の質問
-    .col-md.me-sm-4.p-4
-      - if @question_top.present?
-        .my-3
-          label.btn-deco.rounded-pill.px-3.py-1.my-3 タイトル
-          .btn-deco.p-2
-            = @question_top.title
-        .my-3
-          label.btn-deco.rounded-pill.px-3.py-1.my-3 情報
-          .btn-deco.p-2
-            = @question_top.information
-        .my-3.p-2
-          label.btn-deco.rounded-pill.px-3.py-1.my-3 内容
-          .btn-deco.p-2
-            = @question_top.content
-        = render "answers/answer_count", question: @question_top
-        .d-flex.justify-content-between
-          div class="interest-#{@question_top.id}"
-            = render "interests/interest", question: @question_top
-          = link_to "この質問の詳細へ", @question_top, class: "btn btn-deco"
-      - else
-        p  質問が投稿されていません
-    - if @questions.present?
-      .col-md.solid-deco
-        - @questions.each do |question|
-          .form-deco.p-2.my-3
-            .btn-deco.p-2.d-flex.justify-content-between
-              .d-flex.flex-column
-                = link_to "#{question.title}", question
-                = render "answers/answer_count", question: question
-              .d-flex.flex-column.text-end
-                div class="interest-#{question.id}"
-                  = render "interests/interest", question: question
-                = question.created_at.strftime('%Y/%m/%d')
+.top
+  .container.mx-auto
+    .c-1.d-flex.align-items-center.radius-rounded.px-5
+      = image_pack_tag 'top.png', width: "20%"
+      h2.fw-bold.text-secondary スマートフォンに関するお悩みを一緒に解決　
+.new_questions
+  .container
+    .row.p-xl-5
+      h2.text-secondary.fw-bold.mt-5 新着の質問
+      .col-lg-4.me-lg-4.p-4
+        - if @question_top.present?
+          = render "questions/question_top", question_top: @question_top
+        - else
+          p  質問が投稿されていません
+      .col-lg-7
+        - if @questions.present?
+          = render "shared/questions_list", questions: @questions
+.popular_questions
+
+.sortedt_questions
   = render "questions_dropdowns", answered_questions: @answered_questions, unanswered_questions: @unanswered_questions

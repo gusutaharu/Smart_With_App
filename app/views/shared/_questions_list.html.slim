@@ -1,10 +1,17 @@
 - questions.each do |question|
   .p-2.mt-3
-    .btn-deco.p-2.d-flex.justify-content-between
+    .solid-deco.p-3.d-flex.justify-content-between
       .d-flex.flex-column
+        = link_to user_path(question.user) do
+          - if question.user.user_icon?
+            = image_tag question.user.user_icon.url, class:'rounded-circle',size: "48x48"
+          - else
+            span.material-icons.md-48.text-secondary account_circle
+        = link_to question.user.name, user_path(question.user), class: "mt-1"
+      .d-flex.flex-column.w-75.p-1
         = link_to "#{question.title}", question
-        = render "answers/answer_count", question: question
-      .d-flex.flex-column.text-end
-        div class="interest-#{question.id}"
-          = render "interests/interest", question: question
-        = question.created_at.strftime('%Y/%m/%d')
+        .text-end.mt-auto
+          div class="interest-#{question.id}"
+            = render "interests/interest", question: question
+          = render "answers/answer_count", question: question
+          = question.created_at.strftime('%Y/%m/%d')
