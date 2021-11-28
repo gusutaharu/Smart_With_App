@@ -11,8 +11,10 @@
     label.btn-deco.rounded-pill.px-3.py-1.my-3 内容
     .btn-deco.p-2
       = @question_top.content
-  = render "answers/answer_count", question: @question_top
-  .d-flex.justify-content-between
-    div class="interest-#{@question_top.id}"
-      = render "interests/interest", question: @question_top
-    = link_to "この質問の詳細へ", @question_top, class: "btn btn-deco"
+  .text-end.mt-auto
+    div class="interest-#{question_top.id}"
+      = render "interests/interest", question: question_top
+    = render "answers/answer_count", question: question_top
+    = question_top.created_at.strftime('%Y/%m/%d')
+    br
+      = link_to "この質問の詳細へ", question_top, class: "btn btn-deco mt-2"

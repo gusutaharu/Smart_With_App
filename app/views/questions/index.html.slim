@@ -1,21 +1,39 @@
 .top
-  .container.mx-auto
-    .c-1.d-flex.align-items-center.radius-rounded.px-5
-      = image_pack_tag 'top.png', width: "20%"
-      h2.fw-bold.text-secondary スマートフォンに関するお悩みを一緒に解決　
+  .container
+    .d-flex.align-items-center.justify-content-center.radius-rounded.px-5
+      = image_pack_tag 'top.png', class: "me-2"
+      div.pt-5.text-secondary
+        h2.my-3.fw-bold スマートフォンに関するお悩みを一緒に解決
+        h3.text-end.mt-5.fw-bold Smart With
 .new_questions
   .container
-    .row.p-xl-5
-      h2.text-secondary.fw-bold.mt-5 新着の質問
-      .col-lg-4.me-lg-4.p-4
+    .row
+      .text-secondary.my-5
+        h1.d-inline.fw-bold 新着
+        h2.d-inline.fw-bold の質問
+      .col-lg-5
         - if @question_top.present?
           = render "questions/question_top", question_top: @question_top
         - else
           p  質問が投稿されていません
-      .col-lg-7
+      .col-lg-1
+      .col-lg-6
         - if @questions.present?
           = render "shared/questions_list", questions: @questions
 .popular_questions
-
+  .container
+    .row
+      .text-secondary.my-5
+        h1.d-inline.fw-bold みんなが気になる
+        h2.d-inline.fw-bold 質問
+      .col-lg-5
+        - if @question_top.present?
+          = render "questions/question_top", question_top: @question_top
+        - else
+          p  質問が投稿されていません
+      .col-lg-1
+      .col-lg-6
+        - if @questions.present?
+          = render "shared/questions_list", questions: @questions
 .sortedt_questions
   = render "questions_dropdowns", answered_questions: @answered_questions, unanswered_questions: @unanswered_questions
