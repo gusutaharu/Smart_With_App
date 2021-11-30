@@ -3,6 +3,8 @@ class Question < ApplicationRecord
   belongs_to :user
   has_many :interests, dependent: :destroy
   has_many :answers, dependent: :destroy
+  has_many :question_categories, dependent: :destroy
+  has_many :categories, through: :question_categories
   mount_uploaders :question_images, QuestionImagesUploader
   validates :title, presence: true, length: { maximum: 20 }
   validates :information, presence: true
