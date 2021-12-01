@@ -21,6 +21,19 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @category_hardware = ["---"]
+    Category.where(ancestry: nil).each do |hardware|
+      @category_hardware << hardware.name
+    end
+
+    def get_category_os
+      @category_os = Category.find_by(name: "#{params[:hardware_name]}", ancestry:nil).children
+    end
+
+    def get_category_condition
+      @category_condition = Category.find("#{params[:os_id]}").children
+    end
+
     unless user_signed_in?
       flash[:notice] = "質問を投稿するにはログインが必要です"
       redirect_to new_user_session_path
@@ -76,6 +89,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :information, :content, { question_images: [] })
+    params.require(:question).permit(:title, :information, :content, { question_images: [] }, { category_ids: [] })
   end
 end

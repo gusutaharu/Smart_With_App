@@ -16,6 +16,7 @@ import "../src/form_data.js";
 import "../src/img_zoom.js";
 import "../src/icon_preview.js";
 import "../src/answer_preview.js";
+import "../src/category.js";
 
 require("bootstrap");
 

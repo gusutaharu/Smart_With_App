@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   }
   resources :users, only: [:show]
   resources :questions do
-    get :search_results, on: :collection
+    collection do 
+      get :search_results
+      get :get_category_os, defaults: { format: 'json' }
+      get :get_category_condition, defaults: { format: 'json' }
+    end
     resource :interests, only: [:create, :destroy]
     resources :answers, only: [:create, :destroy]
   end

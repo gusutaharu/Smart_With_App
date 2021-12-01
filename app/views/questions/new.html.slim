@@ -16,9 +16,10 @@
     .form-group.mb-4
       = f.file_field :question_images, multiple: true
       span 画像はjpg、png、gifのいずれかの形式で一枚のサイズが10MB以内
-      = render partial: "preview"
-      = render partial: "img_zoom"
-      = render partial: "form_modal", locals: { f: f }
+      = render "preview"
+      = render "img_zoom"
+      = render "form_modal", f: f
+      = render "category_form", f: f
     .text-end
       button.btn.btn-deco type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
         | 確認
