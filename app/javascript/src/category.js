@@ -17,8 +17,8 @@ $(document).on('turbolinks:load', function() {
   }
   function appendGrandchildrenBox(insertHTML){
     let grandchildSelectHtml = '';
-    grandchildSelectHtml = `<div class='listing-select-wrapper_added' id= 'grandchildren_wrapper>
-                              <div class='listing-select-wrapper_box>
+    grandchildSelectHtml = `<div class='listing-select-wrapper_added' id= 'grandchildren_wrapper'>
+                              <div class='listing-select-wrapper_box'>
                                 <select class='listing-select-wrapper_box--select' id='grandchild_category' name='category_id'>
                                   <option value='---' data-category='---'>---</option>
                                   ${insertHTML}
@@ -39,8 +39,6 @@ $(document).on('turbolinks:load', function() {
       .done(function(children){
         $('#children_wrapper').remove();
         $('#grandchildren_wrapper').remove();
-        $('#size_wrapper').remove();
-        $('#brand_wrapper').remove();
         let insertHTML = '';
         children.forEach(function(child){
           insertHTML += appendOption(child);
@@ -61,7 +59,7 @@ $(document).on('turbolinks:load', function() {
       $.ajax({
         url: 'get_category_condition',
         type: 'GET',
-        data: { child_id: childId },
+        data: { os_id: childId },
         dataType: 'json'
       })
       .done(function(grandchildren){

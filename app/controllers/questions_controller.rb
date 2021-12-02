@@ -27,7 +27,7 @@ class QuestionsController < ApplicationController
     end
 
     def get_category_os
-      @category_os = Category.find_by(name: "#{params[:hardware_name]}", ancestry:nil).children
+      @category_os = Category.find_by(name: "#{params[:hardware_name]}", ancestry: nil).children
     end
 
     def get_category_condition

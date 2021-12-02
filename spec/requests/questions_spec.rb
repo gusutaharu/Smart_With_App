@@ -64,7 +64,7 @@ RSpec.describe "Questions", type: :request do
         end
       end
 
-      context "無効な属性の場合" do
+      xcontext "無効な属性の場合" do
         let(:question_params) { invalid_question_params }
 
         it "有効な属性の入力を求めるエラーが表示されること" do
@@ -129,7 +129,7 @@ RSpec.describe "Questions", type: :request do
         end
       end
 
-      context "無効な属性の場合" do
+      xcontext "無効な属性の場合" do
         let(:question_params) { invalid_question_params }
 
         it "有効な属性の入力を求めるエラーが表示されること" do

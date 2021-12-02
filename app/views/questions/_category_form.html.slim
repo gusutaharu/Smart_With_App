@@ -1,8 +1,7 @@
 .listing-form-box
   .listing-product-detail_category
     = f.label 'カテゴリー', class: 'listing-default_label'
-    span.linsting-default-require
-      | 必須
+    span.linsting-default-require 必須
     .linting-select-wrapper
       .listing-select-wrapper_box
         = f.select :category, @category_hardware, {}, { class: 'listing-select-wrapper_box-select', id: 'hardware_category' }

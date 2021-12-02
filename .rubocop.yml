@@ -6,6 +6,7 @@ Rails:
 LineLength:
   Max: 100
   Exclude:
+    - 'app/controllers/questions_controller.rb'
     - 'app/uploaders/user_icon_uploader.rb'
     - 'app/uploaders/question_images_uploader.rb'
     - 'app/uploaders/answer_image_uploader.rb'
