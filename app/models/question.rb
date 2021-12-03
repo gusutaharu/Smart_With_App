@@ -9,6 +9,7 @@ class Question < ApplicationRecord
   validates :title, presence: true, length: { maximum: 20 }
   validates :information, presence: true
   validates :content, presence: true
+  validates :category_ids, presence: true
   validate :validate_number_of_images
 
   private

@@ -21,17 +21,17 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
-    @category_hardware = ["---"]
+    @category_hardware = [""]
     Category.where(ancestry: nil).each do |hardware|
       @category_hardware << [hardware.name, hardware.id]
     end
 
     def get_category_os
-      @category_os = Category.find("#{ params[:hardware_id] }").children
+      @category_os = Category.find("#{params[:hardware_id]}").children
     end
 
     def get_category_condition
-      @category_condition = Category.find("#{ params[:os_id] }").children
+      @category_condition = Category.find("#{params[:os_id]}").children
     end
 
     unless user_signed_in?
@@ -46,6 +46,10 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    @category_hardware = [""]
+    Category.where(ancestry: nil).each do |hardware|
+      @category_hardware << [hardware.name, hardware.id]
+    end
     @question = current_user.questions.new(question_params)
     if @question.save
       redirect_to questions_url, notice: "質問が作成されました"

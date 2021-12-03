@@ -8,7 +8,7 @@ $(document).on('turbolinks:load', function() {
     childSelectHtml = `<div class='listing-select-wrapper__added' id= 'children_wrapper'>
                         <div class='listing-select-wrapper__box'>
                           <select class='listing-select-wrapper__box--select' id='child_category' name='question[category_ids][]'>
-                            <option value='---' data-category='---'>---</option>
+                            <option data-category=''></option>
                             ${insertHTML}
                           </select>
                         </div>
@@ -20,7 +20,7 @@ $(document).on('turbolinks:load', function() {
     grandchildSelectHtml = `<div class='listing-select-wrapper__added' id= 'grandchildren_wrapper'>
                               <div class='listing-select-wrapper__box'>
                                 <select class='listing-select-wrapper__box--select' id='grandchild_category' name='question[category_ids][]'>
-                                  <option value='---' data-category='---'>---</option>
+                                  <option data-category=''></option>
                                   ${insertHTML}
                                 </select>
                               </div>
@@ -29,9 +29,9 @@ $(document).on('turbolinks:load', function() {
   }
   $('#hardware_category').on('change', function(){
     let hardwareId = document.getElementById('hardware_category').value;
-    if (hardwareId != "---"){
+    if (hardwareId != ""){
       $.ajax({
-        url: 'get_category_os',
+        url: 'questions/get_category_os',
         type: 'GET',
         data: { hardware_id: hardwareId },
         dateType: 'json'
@@ -55,9 +55,9 @@ $(document).on('turbolinks:load', function() {
   });
   $('.listing-product-detail__category').on('change', '#child_category', function(){
     let childId = $('#child_category option:selected').data('category');
-    if (childId != "---"){
+    if (childId != ""){
       $.ajax({
-        url: 'get_category_condition',
+        url: 'questions/get_category_condition',
         type: 'GET',
         data: { os_id: childId },
         dataType: 'json'
