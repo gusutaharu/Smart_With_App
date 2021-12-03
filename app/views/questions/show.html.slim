@@ -16,7 +16,7 @@
     p.form-deco.mt-3.px-2.py-3 = @question.content
     lebel.fs-4 カテゴリー
     - @question.categories.each do |category|
-      = category.id
+      = category.name
     .show-img.my-3.px-2.py-3
       - @question.question_images.each do |image|
         = link_to image_tag(image.url), "", class: "zoom"

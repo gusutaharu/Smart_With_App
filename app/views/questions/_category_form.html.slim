@@ -1,8 +1,7 @@
 .listing-form-box
-  .listing-product-detail_category
+  .listing-product-detail__category
     = f.label 'カテゴリー', class: 'listing-default_label'
     span.linsting-default-require 必須
     .linting-select-wrapper
-      .listing-select-wrapper_box
-        = f.select :category, @category_hardware, {}, { class: 'listing-select-wrapper_box-select', id: 'hardware_category' }
-        i.fas.fa-chevorn-down.listing-select-wrapper_box-arrorw-down
+      .listing-select-wrapper__box
+        = f.select :category_id, @category_hardware, {}, { class: 'listing-select-wrapper__box-_select', id: 'hardware_category', name: 'question[category_ids][]' }

@@ -1,39 +1,39 @@
 $(document).on('turbolinks:load', function() {
   function appendOption(category){
-    let html = `<option value="${category.name}" data-category="${category.id}">${category.name}</option>`;
+    let html = `<option value="${category.id}" data-category="${category.id}">${category.name}</option>`;
     return html;
   }
   function appendChildrenBox(insertHTML){
     let childSelectHtml = '';
-    childSelectHtml = `<div class='listing-select-wrapper_added' id= 'children_wrapper'>
-                        <div class='listing-select-wrapper_box'>
-                          <select class='listing-select-wrapper_box--select' id='child_category' name='category_id'>
+    childSelectHtml = `<div class='listing-select-wrapper__added' id= 'children_wrapper'>
+                        <div class='listing-select-wrapper__box'>
+                          <select class='listing-select-wrapper__box--select' id='child_category' name='question[category_ids][]'>
                             <option value='---' data-category='---'>---</option>
                             ${insertHTML}
                           </select>
                         </div>
                       </div>`;
-    $('.listing-product-detail_category').append(childSelectHtml);
+    $('.listing-product-detail__category').append(childSelectHtml);
   }
   function appendGrandchildrenBox(insertHTML){
     let grandchildSelectHtml = '';
-    grandchildSelectHtml = `<div class='listing-select-wrapper_added' id= 'grandchildren_wrapper'>
-                              <div class='listing-select-wrapper_box'>
-                                <select class='listing-select-wrapper_box--select' id='grandchild_category' name='category_id'>
+    grandchildSelectHtml = `<div class='listing-select-wrapper__added' id= 'grandchildren_wrapper'>
+                              <div class='listing-select-wrapper__box'>
+                                <select class='listing-select-wrapper__box--select' id='grandchild_category' name='question[category_ids][]'>
                                   <option value='---' data-category='---'>---</option>
                                   ${insertHTML}
                                 </select>
                               </div>
                             </div>`;
-    $('.listing-product-detail_category').append(grandchildSelectHtml);
+    $('.listing-product-detail__category').append(grandchildSelectHtml);
   }
   $('#hardware_category').on('change', function(){
-    let hardwareCategory = document.getElementById('hardware_category').value;
-    if (hardwareCategory != "---"){
+    let hardwareId = document.getElementById('hardware_category').value;
+    if (hardwareId != "---"){
       $.ajax({
         url: 'get_category_os',
         type: 'GET',
-        data: { hardware_name: hardwareCategory },
+        data: { hardware_id: hardwareId },
         dateType: 'json'
       })
       .done(function(children){
@@ -53,7 +53,7 @@ $(document).on('turbolinks:load', function() {
       $('#grandchildren_wrapper').remove();
     }
   });
-  $('.listing-product-detail_category').on('change', '#child_category', function(){
+  $('.listing-product-detail__category').on('change', '#child_category', function(){
     let childId = $('#child_category option:selected').data('category');
     if (childId != "---"){
       $.ajax({
