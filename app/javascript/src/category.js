@@ -31,7 +31,7 @@ $(document).on('turbolinks:load', function() {
     let hardwareId = document.getElementById('hardware_category').value;
     if (hardwareId != ""){
       $.ajax({
-        url: 'questions/get_category_os',
+        url: 'get_category_os',
         type: 'GET',
         data: { hardware_id: hardwareId },
         dateType: 'json'
@@ -57,7 +57,7 @@ $(document).on('turbolinks:load', function() {
     let childId = $('#child_category option:selected').data('category');
     if (childId != ""){
       $.ajax({
-        url: 'questions/get_category_condition',
+        url: 'get_category_condition',
         type: 'GET',
         data: { os_id: childId },
         dataType: 'json'

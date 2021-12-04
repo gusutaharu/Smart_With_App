@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    @question = Question.new(session[:question] || {})
     @category_hardware = [""]
     Category.where(ancestry: nil).each do |hardware|
       @category_hardware << [hardware.name, hardware.id]
@@ -35,8 +35,7 @@ class QuestionsController < ApplicationController
     end
 
     unless user_signed_in?
-      flash[:notice] = "質問を投稿するにはログインが必要です"
-      redirect_to new_user_session_path
+      redirect_to new_user_session_path, flash: { danger: "質問を投稿するにはログインが必要です" }
     end
   end
 
@@ -46,15 +45,14 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @category_hardware = [""]
-    Category.where(ancestry: nil).each do |hardware|
-      @category_hardware << [hardware.name, hardware.id]
-    end
     @question = current_user.questions.new(question_params)
     if @question.save
-      redirect_to questions_url, notice: "質問が作成されました"
+      session[:question] = nil
+      redirect_to questions_url, flash: { success: "質問が作成されました" }
     else
-      render :new
+      session[:question] = @question.attributes.slice(*question_params.keys)
+      flash[:danger] = @question.errors.full_messages
+      redirect_to new_question_url
     end
   end
 
@@ -65,16 +63,17 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.find(params[:id])
     if @question.update(question_params)
-      redirect_to question_url, notice: "質問を更新しました"
+      redirect_to question_url, flash: { success: "質問を更新しました" }
     else
-      render :new
+      flash[:danger] = @question.errors.full_messages
+      redirect_to edit_question_url @question
     end
   end
 
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
-    redirect_to root_url, notice: "質問を削除しました。"
+    redirect_to root_url, flash: { success: "質問を削除しました" }
   end
 
   def search_results
@@ -87,8 +86,7 @@ class QuestionsController < ApplicationController
   def ensure_correct_user
     @question = Question.find_by(id: params[:id])
     if @question.user_id != current_user.id
-      flash[:notice] = "権限がありません"
-      redirect_to root_path
+      redirect_to root_path, flash: { danger: "権限がありません" }
     end
   end
 
