@@ -10,6 +10,9 @@ class QuestionsController < ApplicationController
     answers = Answer.all.recent.pluck(:question_id).uniq
     @answered_questions = Question.find(answers)
     @unanswered_questions = Question.where.not(id: answers).recent
+    @category_hardware = Category.where(ancestry: nil)
+    @category_smart_os = Category.find(1).children
+    @all_condition = Category.find(4).children
   end
 
   def show
@@ -78,7 +81,7 @@ class QuestionsController < ApplicationController
 
   def search_results
     @questions = @q.result.recent.page(params[:page]).per(5)
-    @key_word = params[:q]["title_or_information_or_content_cont"]
+    @key_word = params[:q]["title_or_information_or_content_cont"] || params[:q]["categories_name_eq"]
   end
 
   private
