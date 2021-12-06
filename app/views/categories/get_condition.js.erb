@@ -1,0 +1,2 @@
+$("#condition_list").remove();
+$("#condition_area").html("<%= j(render "category_condition", selected_hardware: @selected_hardware, selected_os: @selected_os, category_condition: @category_condition) %>");

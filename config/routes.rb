@@ -11,6 +11,12 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
   }
   resources :users, only: [:show]
+  resources :categories, only: [:index] do
+    collection do
+      get :get_os
+      get :get_condition
+    end
+  end
   resources :questions do
     collection do
       get :search_results

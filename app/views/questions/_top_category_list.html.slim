@@ -1,10 +1,9 @@
-h3.fw-bold.my-5 カテゴリー
-ul.fs-4
-  - @category_hardware.each do |hardware|
-    li.mb-2 = link_to hardware.name, { controller=> "questions", :action=> "search_results", :q=>{:categories_name_eq=>"#{hardware.name}"} }
-ul.fs-4
-  - @category_smart_os.each do |os|
-    li.mb-2 = link_to os.name, { controller=> "questions", :action=> "search_results", :q=>{:categories_name_eq=>"#{os.name}"} }
-ul.fs-4
-  - @all_condition.each do |condition|
-    li.mb-2 = link_to condition.name, { controller=> "questions", :action=> "search_results", :q=>{:categories_name_eq=>"#{condition.name}"} }
+= link_to categories_path do
+  h3.fw-bold.my-5 カテゴリー
+  ul.fs-4
+    - @category_hardware.each do |hardware|
+      li.mb-2 = link_to hardware.name, search_results_questions_path(q: {:categories_name_eq=>"#{hardware.name}"})
+  ul.fs-4
+    - @category_smart_os.each do |os|
+      li.mb-2 = link_to os.name, search_results_questions_path(q: {:categories_name_eq=>"#{os.name}"})
+  = link_to "カテゴリーから探す", categories_path, class: "fs-4"

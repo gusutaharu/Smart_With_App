@@ -1,0 +1,3 @@
+$("#os_list").remove();
+$("#condition_list").remove();
+$("#os_area").html("<%= j(render "category_os",selected_hardware: @selected_hardware, category_os: @category_os) %>");
