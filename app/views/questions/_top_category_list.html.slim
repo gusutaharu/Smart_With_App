@@ -1,5 +1,8 @@
-= link_to categories_path do
-  h3.fw-bold.my-5 カテゴリー
+.text-center.d-lg-none.my-3
+  = link_to "カテゴリーから探す", categories_path, class: "fs-4 btn btn-deco"
+.d-lg-block.d-none
+  = link_to categories_path do
+    h3.fw-bold.my-5 カテゴリー
   ul.fs-4
     - @category_hardware.each do |hardware|
       li.mb-2 = link_to hardware.name, search_results_questions_path(q: {:categories_name_eq=>"#{hardware.name}"})

@@ -17,6 +17,7 @@ import "../src/img_zoom.js";
 import "../src/icon_preview.js";
 import "../src/answer_preview.js";
 import "../src/category.js";
+import "../src/section_title.js";
 
 require("bootstrap");
 

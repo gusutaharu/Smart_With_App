@@ -1,18 +1,15 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:confirm_new, :create, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
-  RECENT_QUESTIONS = 6
+  MAX_QUESTIONS_COUNT = 6
 
   def index
-    questions = Question.all.recent
-    @question_top = questions.first
-    @questions = questions.limit(RECENT_QUESTIONS).drop(1)
-    answers = Answer.all.recent.pluck(:question_id).uniq
-    @answered_questions = Question.find(answers)
-    @unanswered_questions = Question.where.not(id: answers).recent
+    @questions = Question.all.recent.limit(MAX_QUESTIONS_COUNT)
+    @month_question_ranks = Question.find(Interest.group(:question_id).where(created_at: Time.current.all_month).order('count(question_id) desc').limit(MAX_QUESTIONS_COUNT).pluck(:question_id))
+    @answered_questions = Question.where(id: Answer.where(parent_id: nil).select(:question_id)).recent.limit(MAX_QUESTIONS_COUNT)
+    @unanswered_questions = Question.where.not(id: Answer.all.pluck(:question_id).uniq).recent.limit(MAX_QUESTIONS_COUNT)
     @category_hardware = Category.where(ancestry: nil)
     @category_smart_os = Category.find(1).children
-    @all_condition = Category.find(4).children
   end
 
   def show
