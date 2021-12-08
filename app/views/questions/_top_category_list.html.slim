@@ -5,8 +5,8 @@
     h3.fw-bold.my-5 カテゴリー
   ul.fs-4
     - @category_hardware.each do |hardware|
-      li.mb-2 = link_to hardware.name, search_results_questions_path(q: {:categories_name_eq=>"#{hardware.name}"})
+      li.mb-2 = link_to hardware.name, search_index_path(q: {:categories_name_eq=>"#{hardware.name}"})
   ul.fs-4
     - @category_smart_os.each do |os|
-      li.mb-2 = link_to os.name, search_results_questions_path(q: {:categories_name_eq=>"#{os.name}"})
+      li.mb-2 = link_to os.name, search_index_path(q: {:categories_name_eq=>"#{os.name}"})
   = link_to "カテゴリーから探す", categories_path, class: "fs-4"

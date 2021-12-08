@@ -2,6 +2,6 @@
   span.border-bottom.fw-bold.fs-3
     = selected_hardware.name
   ul.fs-4
-    li.my-3= link_to "すべて", search_results_questions_path(q: {:categories_name_eq=>"#{selected_hardware.name}"})
+    li.my-3= link_to "すべて", search_index_path(q: {:categories_name_eq=>"#{selected_hardware.name}"})
     - category_os.each do |os|
       li.mb-4= link_to os.name, get_condition_categories_path(os_id: os.id), remote: true

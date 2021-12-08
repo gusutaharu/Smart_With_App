@@ -19,11 +19,17 @@ Rails.application.routes.draw do
   end
   resources :questions do
     collection do
-      get :search_results
       get :get_category_os, defaults: { format: 'json' }
       get :get_category_condition, defaults: { format: 'json' }
     end
     resource :interests, only: [:create, :destroy]
     resources :answers, only: [:create, :destroy]
+  end
+  resources :search, only: [:index] do
+    collection do
+      get :all_questions
+      get :answered_questions
+      get :unanswered_questions
+    end
   end
 end

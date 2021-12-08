@@ -1,0 +1,6 @@
+#pills-tabContent.tab-content
+  #pills-all.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="pills-all-tab"]
+    = render "shared/questions_list", questions: questions
+    .mt-3
+      = paginate questions
+      = page_entries_info questions

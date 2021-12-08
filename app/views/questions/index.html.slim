@@ -17,7 +17,7 @@
         - if @questions.present?
           = render "shared/questions_list", questions: @questions
         .text-end
-          = link_to  "もっと見る", search_results_questions_path(q: {:title_or_information_or_content_cont => "" }), class: "btn btn-deco"
+          = link_to  "もっと見る", search_index_path(q: {:title_or_information_or_content_cont => "" }), class: "btn btn-deco"
 .popular_questions
   .container
     .row
@@ -34,5 +34,5 @@
         .text-secondary.my-5
           h1#changing-title.d-inline.fw-bold 未回答の
           h2.d-inline.fw-bold 質問
-        = render "questions_dropdowns", answered_questions: @answered_questions, unanswered_questions: @unanswered_questions
+        = render "question_tabs", answered_questions: @answered_questions, unanswered_questions: @unanswered_questions
       .col-lg-1

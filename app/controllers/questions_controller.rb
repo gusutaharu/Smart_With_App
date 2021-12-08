@@ -6,8 +6,9 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.all.recent.limit(MAX_QUESTIONS_COUNT)
     @month_question_ranks = Question.find(Interest.group(:question_id).where(created_at: Time.current.all_month).order('count(question_id) desc').limit(MAX_QUESTIONS_COUNT).pluck(:question_id))
-    @answered_questions = Question.where(id: Answer.where(parent_id: nil).select(:question_id)).recent.limit(MAX_QUESTIONS_COUNT)
-    @unanswered_questions = Question.where.not(id: Answer.all.pluck(:question_id).uniq).recent.limit(MAX_QUESTIONS_COUNT)
+    answers = Answer.where(parent_id: nil).select(:question_id).distinct
+    @answered_questions = Question.where(id: answers).recent.limit(MAX_QUESTIONS_COUNT)
+    @unanswered_questions = Question.where.not(id:answers).recent.limit(MAX_QUESTIONS_COUNT)
     @category_hardware = Category.where(ancestry: nil)
     @category_smart_os = Category.find(1).children
   end
@@ -76,16 +77,6 @@ class QuestionsController < ApplicationController
     redirect_to root_url, flash: { success: "質問を削除しました" }
   end
 
-  def search_results
-    @questions = @q.result.recent.page(params[:page]).per(5)
-    if params[:hardware_name] && params[:os_name]
-      @key_word = "#{params[:hardware_name]}/#{params[:os_name]}/#{Category.find(params[:q]["categories_id_eq"]).name}"
-    elsif params[:hardware_name]
-      @key_word = "#{params[:hardware_name]}/#{params[:q]["categories_name_eq"]}"
-    else
-      @key_word = params[:q]["title_or_information_or_content_cont"] || params[:q]["categories_name_eq"]
-    end
-  end
 
   private
 
