@@ -1,22 +1,22 @@
 .container
-  .row
-    .col-2
-      - if @key_word.nil?
-        = "全ての質問" 
-      - else
-        = "#{@key_word}の検索結果"
-        = " : #{@questions.count} 件"
+  .row.justify-content-center
     .col-xl-8
+      .mb-5
+        - if @key_word.empty?
+          = "全ての質問"
+        - else
+          = "#{@key_word}の検索結果"
+          = " : #{@questions.count} 件"
       ul#pills-tab.nav.nav-pills.mb-3[role="tablist"]
         li.nav-item[role="presentation"]
-          = link_to all_questions_search_index_path, remote: true, class: "nav-link active btn-deco me-1" do
-            | すべて
+          a#pills-all-tab.nav-link.btn-deco.me-2.active[data-bs-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true"]
+            | 投稿した質問
         li.nav-item[role="presentation"]
-          = link_to unanswered_questions_search_index_path, remote: true, class: "nav-link btn-deco me-1" do
-            | 未回答の質問
+          a#pills-unanswered-tab.nav-link.me-2.btn-deco[data-bs-toggle="pill" href="#pills-unanswered" role="tab" aria-controls="pills-unanswered" aria-selected="false"]
+            | 気になる質問
         li.nav-item[role="presentation"]
-          = link_to answered_questions_search_index_path, remote: true, class: "nav-link btn-deco me-1" do
-            | 回答済みの質問
-      #question_tabs_area
-        = render 'search_results_tabs', questions: @questions
+          a#pills-answered-tab.nav-link.btn-deco[data-bs-toggle="pill" href="#pills-answered" role="tab" aria-controls="pills-answered" aria-selected="false"]
+            | 回答した質問
+      #tabs_area
+        = render "search_results_tabs", questions: @questions, answered_questions: @answered_questions, unanswered_questions: @unanswered_questions
   = "#{@key_word}で検索しましたが、質問が見つかりません" unless @questions.present?

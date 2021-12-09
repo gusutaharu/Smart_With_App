@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
     @month_question_ranks = Question.find(Interest.group(:question_id).where(created_at: Time.current.all_month).order('count(question_id) desc').limit(MAX_QUESTIONS_COUNT).pluck(:question_id))
     answers = Answer.where(parent_id: nil).select(:question_id).distinct
     @answered_questions = Question.where(id: answers).recent.limit(MAX_QUESTIONS_COUNT)
-    @unanswered_questions = Question.where.not(id:answers).recent.limit(MAX_QUESTIONS_COUNT)
+    @unanswered_questions = Question.where.not(id: answers).recent.limit(MAX_QUESTIONS_COUNT)
     @category_hardware = Category.where(ancestry: nil)
     @category_smart_os = Category.find(1).children
   end
@@ -76,7 +76,6 @@ class QuestionsController < ApplicationController
     @question.destroy
     redirect_to root_url, flash: { success: "質問を削除しました" }
   end
-
 
   private
 
