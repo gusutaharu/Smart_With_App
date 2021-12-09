@@ -7,16 +7,17 @@
         - else
           = "#{@key_word}の検索結果"
           = " : #{@questions.count} 件"
+      = "#{@key_word}で検索しましたが、質問が見つかりません" unless @questions.present?
       ul#pills-tab.nav.nav-pills.mb-3[role="tablist"]
-        li.nav-item[role="presentation"]
+        li.search-sort.nav-item[role="presentation"]
           a#pills-all-tab.nav-link.btn-deco.me-2.active[data-bs-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true"]
-            | 投稿した質問
-        li.nav-item[role="presentation"]
+            | すべて
+        li.search-sort.nav-item[role="presentation"]
           a#pills-unanswered-tab.nav-link.me-2.btn-deco[data-bs-toggle="pill" href="#pills-unanswered" role="tab" aria-controls="pills-unanswered" aria-selected="false"]
-            | 気になる質問
-        li.nav-item[role="presentation"]
+            | 未回答
+        li.search-sort.nav-item[role="presentation"]
           a#pills-answered-tab.nav-link.btn-deco[data-bs-toggle="pill" href="#pills-answered" role="tab" aria-controls="pills-answered" aria-selected="false"]
-            | 回答した質問
+            | 回答済み
       #tabs_area
         = render "search_results_tabs", questions: @questions, answered_questions: @answered_questions, unanswered_questions: @unanswered_questions
-  = "#{@key_word}で検索しましたが、質問が見つかりません" unless @questions.present?
+  

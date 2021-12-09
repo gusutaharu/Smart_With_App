@@ -18,7 +18,9 @@ import "../src/icon_preview.js";
 import "../src/answer_preview.js";
 import "../src/category.js";
 import "../src/section_title.js";
-import "../src/pagination_reset.js";
+import "../src/save_acitve.js";
+
+window.Cookies = require("js-cookie")
 
 require("bootstrap");
 
