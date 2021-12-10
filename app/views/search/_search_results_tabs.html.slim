@@ -2,23 +2,18 @@
   #pills-all.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="pills-post-tab"]
     = render "shared/questions_list", questions: questions
     #all_paginate
-      = paginate questions
-      = page_entries_info questions
+      = paginate questions, window: 1
   #pills-unanswered.tab-pane.fade[role="tabpanel" aria-labelledby="pills-favorite-tab"]
     - if  unanswered_questions.present?
       = render "shared/questions_list", questions: unanswered_questions
       #unanswered_paginate
-        = paginate unanswered_questions, param_name: :page_a
-        = page_entries_info unanswered_questions
+        = paginate unanswered_questions, param_name: :page_a, window: 1
     - else
       | 気になる質問はまだありません
   #pills-answered.tab-pane.fade[role="tabpanel" aria-labelledby="pills-answer-tab"]
     - if  answered_questions.present?
       = render "shared/questions_list", questions: answered_questions
       #answered_paginate
-        = paginate answered_questions, param_name: :page_b
-        = page_entries_info answered_questions
+        = paginate answered_questions, param_name: :page_b, window: 1
     - else
       | 回答した質問はまだありません
-
-      

@@ -127,3 +127,21 @@ ul{
   height: 20%;
   width: 20%;
 }
+
+.page,.next,.prev,.first,.last{
+  margin: 10px 5px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background-color: #fdfdfd;
+  box-shadow: -2px -2px 5px rgba(255,255,255,1),
+              3px 3px 5px rgba(0,0,0,.07);
+}
+
+.first,.last{
+  display: none;
+}
+
+.current {
+  color:#fff;
+  background-color: #0d6efd;
+}
