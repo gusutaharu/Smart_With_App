@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [:confirm_new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   MAX_QUESTIONS_COUNT = 6
 
@@ -38,11 +38,6 @@ class QuestionsController < ApplicationController
     unless user_signed_in?
       redirect_to new_user_session_path, flash: { danger: "質問を投稿するにはログインが必要です" }
     end
-  end
-
-  def confirm_new
-    @question = current_user.questions.new(question_params)
-    render :new unless @question.valid?
   end
 
   def create
