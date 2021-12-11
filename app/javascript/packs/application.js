@@ -18,7 +18,8 @@ import "../src/icon_preview.js";
 import "../src/answer_preview.js";
 import "../src/category.js";
 import "../src/section_title.js";
-import "../src/save_acitve.js";
+import "../src/save_acitve_search.js";
+import "../src/save_active_users.js";
 
 window.Cookies = require("js-cookie")
 

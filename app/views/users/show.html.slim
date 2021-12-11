@@ -1,33 +1,22 @@
 .container
-  - if @user.user_icon?
-    = image_tag @user.user_icon.url, class:'rounded-circle',size: "96x96"
-  - else
-    span.material-icons.md-96.text-secondary account_circle
-  br
-  = @user.name
-  br
-  - if @user == current_user
-    = link_to "編集する", edit_user_registration_path
-  ul#pills-tab.nav.nav-pills.mb-3[role="tablist"]
-    li.nav-item[role="presentation"]
-      a#pills-post-tab.nav-link.btn-deco.me-2.active[data-bs-toggle="pill" href="#pills-post" role="tab" aria-controls="pills-post" aria-selected="true"]
-        | 投稿した質問
-    li.nav-item[role="presentation"]
-      a#pills-favorite-tab.nav-link.me-2.btn-deco[data-bs-toggle="pill" href="#pills-favorite" role="tab" aria-controls="pills-favorite" aria-selected="false"]
-        | 気になる質問
-    li.nav-item[role="presentation"]
-      a#pills-answer-tab.nav-link.btn-deco[data-bs-toggle="pill" href="#pills-answer" role="tab" aria-controls="pills-answer" aria-selected="false"]
-        | 回答した質問
-  #pills-tabContent.tab-content
-    #pills-post.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="pills-post-tab"]
-      = render "shared/questions_list", questions: @questions
-    #pills-favorite.tab-pane.fade[role="tabpanel" aria-labelledby="pills-favorite-tab"]
-      - if  @interesting_questions.present?
-        = render "shared/questions_list", questions: @interesting_questions
-      - else
-        | 気になる質問はまだありません
-    #pills-answer.tab-pane.fade[role="tabpanel" aria-labelledby="pills-answer-tab"]
-      - if  @answered_questions.present?
-        = render "shared/questions_list", questions: @answered_questions
-      - else
-        | 回答した質問はまだありません
+  .row.justify-content-center
+    .col-xl-8
+      #user_info.mb-5.text-center
+        - if @user.user_icon?
+          = image_tag @user.user_icon.url, class:'rounded-circle',size: "96x96"
+        - else
+          span.material-icons.md-96.text-secondary account_circle
+        p.fs-3= @user.name
+        .text-end= link_to "編集する", edit_user_registration_path, class: "btn btn-deco" if @user == current_user
+      #questions_area
+        ul#pills-tab.nav.nav-pills.mb-3[role="tablist"]
+          li.users-sort.nav-item[role="presentation"]
+            a#pills-post-tab.nav-link.btn-deco.me-1.active[data-bs-toggle="pill" href="#pills-post" role="tab" aria-controls="pills-post" aria-selected="true"]
+              | 投稿
+          li.users-sort.nav-item[role="presentation"]
+            a#pills-interest-tab.nav-link.me-1.btn-deco[data-bs-toggle="pill" href="#pills-interest" role="tab" aria-controls="pills-interest" aria-selected="false"]
+              | 気になる質問
+          li.users-sort.nav-item[role="presentation"] 
+            a#pills-answer-tab.nav-link.btn-deco[data-bs-toggle="pill" href="#pills-answer" role="tab" aria-controls="pills-answer" aria-selected="false"]
+              | 回答した質問
+        = render 'users_tabs', questions: @questions, interesting_questions: @interesting_questions, answered_questions: @answered_questions
