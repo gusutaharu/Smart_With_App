@@ -1,7 +1,6 @@
 .listing-form-box
-  .listing-product-detail__category
+  .listing-product-detail__category.fs-4.fw-bold
     = f.label 'カテゴリー', class: 'listing-default_label'
-    span.linsting-default-require 必須
     .linting-select-wrapper
       .listing-select-wrapper__box
         = f.select :category_id, @category_hardware, {}, { class: 'listing-select-wrapper__box-_select', id: 'hardware_category', name: 'question[category_ids][]' }

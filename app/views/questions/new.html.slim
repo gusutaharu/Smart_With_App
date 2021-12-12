@@ -1,25 +1,29 @@
-- if @question.errors.present?
-  ul#error_explanation.text-center
-    - @question.errors.full_messages.each do |message|
-      li= message
-.container.solid-deco.mx-auto.p-sm-5.p-2.fs-4
-  = form_with model: @question, local: true do |f|
-    .form-group.mb-5
-      = f.label "タイトル"
-      = f.text_field :title, class: "form-control form-deco mt-3 px-2 py-3"
-    .form-group.mb-5
-      = f.label "情報"
-      = f.text_area :information, rows: 5,class: "form-control form-deco mt-3 px-2 py-3"
-    .form-group.mb-4
-      = f.label "内容"
-      = f.text_area :content, rows: 10, class: "form-control form-deco mt-3 px-2 py-3"
-    .form-group.mb-4
-      = f.file_field :question_images, multiple: true
-      span 画像はjpg、png、gifのいずれかの形式で一枚のサイズが10MB以内
-      = render "preview"
-      = render "img_zoom"
-      = render "form_modal", f: f
-      = render "category_form", f: f
-    .text-end
-      button.btn.btn-deco type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
-        | 確認
+.container
+  .row
+    .col-lg-8.solid-deco.mx-auto.p-sm-5.pt-5
+      = form_with model: @question, local: true do |f|
+        .form-group.mb-5
+          = f.label "タイトル", class: "fs-4 fw-bold"
+          p 質問のタイトルを20字以内で書きましょう
+          = f.text_field :title, class: "form-control form-deco mt-3 p-3", placeholder: "例: OSのアップデートができない"
+        .form-group.mb-5
+          = f.label "情報", class: "fs-4 fw-bold"
+          p お使いの機種やOSのバージョンなど、症状の解決につながる情報を書きましょう
+          = f.text_area :information, rows: 5,class: "form-control form-deco mt-3 p-3", placeholder: "例: 機種:iPhone 7 OS:iOS 11.00"
+        .form-group.mb-4
+          = f.label "内容", class: "fs-4 fw-bold"
+          p お困りの内容をわかる範囲で、環境や状況そして再現頻度なども含めて書きましょう
+          = f.text_area :content, rows: 10, class: "form-control form-deco mt-3 p-3", placeholder: "例: スマホからアップデートをWi-Fi接続下で行いましたが、アップデートデータのダウンロードが行われません。空き容量も不足しておらず原因がわかりません。"
+        .form-group
+          = render "category_form", f: f
+        .form-group.mb-4
+          .text-end.mb-4
+            = f.label :question_images, "画像を選択", class: "btn btn-deco mb-4"
+            = f.file_field :question_images, multiple: true, class: "d-none"
+            p jpg、png、gif形式で一枚のサイズが10MB以内
+          = render "preview"
+          = render "img_zoom"
+          = render "form_modal", f: f
+        .text-end
+          button.btn.btn-deco.mb-4 type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            | 確認
