@@ -1,29 +1,29 @@
-.container.text-center
-  h2
-    | Sign up
-  = form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
-    = render "users/shared/error_messages", resource: @user
-    .field
-      = f.label :name
-      br
-      = f.text_field :name, autofocus: true,autocomplete: "name"
-    .field
-      = f.label :email
-      br
-      = f.email_field :email, autocomplete: "email"
-    .field
-      = f.label :password
-      - if @minimum_password_length
-        em
-          | (
-          = @minimum_password_length
-          |  characters minimum)
-      br
-      = f.password_field :password, autocomplete: "new-password"
-    .field
-      = f.label :password_confirmation
-      br
-      = f.password_field :password_confirmation, autocomplete: "new-password"
-    .actions
-      = f.submit "Sign up"
-  = render "users/shared/links"
+.container
+  .row.justify-content-center
+    .col-lg-8
+      .text-center.mb-5
+        h1.fw-bold 新規登録
+      = form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
+        = render "users/shared/error_messages", resource: @user
+        .form-group.mb-4
+          = f.label :name, class: "fs-5 fw-bold"
+          = f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control form-deco p-2"
+        .form-group.mb-4
+          = f.label :email, class: "fs-5 fw-bold"
+          = f.email_field :email, autocomplete: "email", class: "form-control form-deco p-2"
+        .form-group.mb-4
+          = f.label :password, class: "fs-5 fw-bold"
+          - if @minimum_password_length
+              | (
+              = @minimum_password_length
+              |  文字以上で作成してください)
+          = f.password_field :password, autocomplete: "new-password", class: "form-control form-deco p-2"
+        .form-group.mb-5
+          = f.label :password_confirmation, class: "fs-5 fw-bold"
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-deco p-2"
+        .text-center.mb-5
+          = f.submit "登録する", class: "btn btn-deco"
+        .form-group
+          label.fs-5.fw-bold アカウントをお持ちの方
+          .text-end
+            = render "users/shared/links"
