@@ -1,12 +1,14 @@
-.container.text-center
-  h2
-    | Forgot your password?
-  = form_with model: @user, url: user_password_path, id: 'new_user', class: 'new_user', local: true do |f|
-    = render "users/shared/error_messages", resource: @user
-    .field
-      = f.label :email
-      br
-      = f.email_field :email, autofocus: true, autocomplete: "email"
-    .actions
-      = f.submit "Send me reset password instructions"
-  = render "users/shared/links"
+.container
+  .row.justify-content-center
+    .col-lg-8
+      .text-center.mb-5
+        h1.fw-bold.mb-5 パスワードを再設定する
+        p 当サービスでご登録されているメールアドレスを入力して、「送信する」を押してください。
+        | 送信後、パスワードの再設定に関するメールが届きますのでご確認ください。
+      = form_with model: @user, url: user_password_path, id: 'new_user', class: 'new_user', local: true do |f|
+        = render "users/shared/error_messages", resource: @user
+        .form-group.mb-5
+          = f.label :email, class: "fs-5 fw-bold"
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-deco p-2"
+        .text-end
+          = f.submit "送信する", class: "btn btn-deco"
