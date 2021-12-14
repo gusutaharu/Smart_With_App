@@ -1,15 +1,18 @@
-- answer.replies.each do |reply|
-  .col-10
-    .col-2
-      = link_to user_path(reply.user) do
-        - if reply.user.user_icon.present?
-          = image_tag reply.user.user_icon.icon.url, class: 'rounded-circle me-2',saize: "48x48"
-        - else
-          span.material-icons.md-48.text-secondary.me-2 account_circle
-        br
-          = reply.user.name
-    .col-8.form-deco
-      = reply.content
-    .text-end
-      - if reply.user == current_user
-        = link_to "削除", question_answer_path(reply.question.id, reply.id), method: :delete, class: "btn btn-deco", remote: true
+.repry_area.p-2
+  - answer.replies.each do |reply|
+    .d-flex.justify-content-between.border-bottom.mb-2
+      .user-icon
+        = link_to user_path(reply.user) do
+          - if reply.user.user_icon.present?
+            = image_tag reply.user.user_icon.icon.url, class: 'rounded-circle me-2',saize: "48x48"
+          - else
+            span.material-icons.md-48.text-secondary.me-2 account_circle
+          br
+            = reply.user.name
+      .d-flex.w-75.flex-column.p-2
+        = reply.content
+        .text-end
+          - if reply.user == current_user
+            = link_to "削除", question_answer_path(reply.question.id, reply.id), method: :delete, class: "btn btn-deco text-danger", remote: true
+    .text-end.mb-4
+      = l reply.created_at, format: :long

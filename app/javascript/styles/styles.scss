@@ -82,14 +82,10 @@ ul{
   &.md-96 { font-size: 96px; }
 }
 
-.img_preview img{
+.img_preview img, .show-img img{
   max-height: 100px;
   max-width: 25%;
   margin-right: 10px;
-}
-
-.show-img img{
-  width: 50%;
 }
 
 .img-zoom {
@@ -147,4 +143,8 @@ ul{
   border-radius: 10px;
   box-shadow:  20px 20px 60px #6a6a6b,
               -20px -20px 60px #909091;
+}
+
+.container{
+  word-break: break-all;
 }

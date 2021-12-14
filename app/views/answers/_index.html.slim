@@ -1,12 +1,12 @@
 .my-3
   - if flash.notice.present?
     .alert.alert-success= flash.notice
-  .my-4 
-    h1 回答数 #{ answers.where(parent_id: nil).count }件
-  - if answers.present?
-    - answers.where(parent_id: nil).each do |answer|
-      .row.solid-deco.m-3.my-5.px-3.py-5
-        .col-2
+h1.my-4 回答数 #{ answers.where(parent_id: nil).count }件
+- if answers.present?
+  - answers.where(parent_id: nil).each do |answer|
+    .solid-deco.p-sm-5.mb-5.p-3
+      .d-flex.justify-content-between.border-bottom.mb-3
+        .user-icon
           = link_to user_path(answer.user) do
             - if answer.user.user_icon.present?
               = image_tag answer.user.user_icon.icon.url, class: 'rounded-circle me-2',saize: "48x48"
@@ -14,20 +14,22 @@
               span.material-icons.md-48.text-secondary.me-2 account_circle
             br
               = answer.user.name
-        .col-8.form-deco
+        .d-flex.w-75.flex-column.p-1
           = answer.content
-        .col-2.text-end
-          - if answer.user == current_user
-            = link_to "削除", question_answer_path(answer.question.id, answer.id), method: :delete, class: "btn btn-deco", remote: true
-        .col
-          - answer.images.each do |image|
-            = link_to "", class: "zoom" do
-              = image_tag image.url, width: '100px', height: 'auto', class: "rounded ms-5"
-      .row.justify-content-end
-        = render "answers/reply_index", question: question, answer: answer
-        - if user_signed_in?
-          = render "answers/reply_form", question: question, answer: answer, answer_reply: answer_reply
-        - else
-          p 回答へのコメントにはログインが必要です
-  - else
-    h3 回答はまだありません
+          .text-end
+            - if answer.user == current_user
+              = link_to "削除", question_answer_path(answer.question.id, answer.id), method: :delete, class: "btn btn-deco text-danger", remote: true
+      .show-img
+        - answer.images.each do |image|
+          = link_to "", class: "zoom" do
+            = image_tag image.url, class: "rounded"
+      .text-end
+        = l answer.created_at, format: :long
+    = render "answers/reply_index", question: question, answer: answer
+    = render "answers/reply_form", question: question, answer: answer, answer_reply: answer_reply if user_signed_in?
+- else
+  h3 回答はまだありません
+- if user_signed_in?
+  = render "answers/form", question: @question, answer: @answer
+- else
+  h4 回答にはログインが必要です
