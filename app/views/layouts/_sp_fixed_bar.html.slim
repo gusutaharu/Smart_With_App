@@ -1,0 +1,14 @@
+.sp-fixed-bar.d-md-none.bg-white
+  ul
+    li
+      = link_to root_path do
+        span.material-icons home
+        span ホーム
+    li
+      = link_to search_index_path(q: {:title_or_information_or_content_cont => "" }) do
+        span.material-icons search
+        span 検索
+    li
+      = link_to new_question_path do
+        span.material-icons device_unknown
+        span 質問

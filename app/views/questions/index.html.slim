@@ -8,7 +8,7 @@
 .new_questions
   .container
     .row
-      .col-lg-3
+      .col-lg-4
         = render "top_category_list"
       .col-lg-8
         .text-secondary.my-5
@@ -16,8 +16,10 @@
           h2.d-inline.fw-bold の質問
         - if @questions.present?
           = render "shared/questions_list", questions: @questions
-        .text-end
-          = link_to  "もっと見る", search_index_path(q: {:title_or_information_or_content_cont => "" }), class: "btn btn-deco"
+          .text-end.mt-3
+            = link_to  "もっと見る", search_index_path(q: {:title_or_information_or_content_cont => "" }), class: "btn btn-deco"
+        - else
+          h3 新着の質問はありません
 .popular_questions
   .container
     .row
@@ -25,8 +27,10 @@
         .text-secondary.my-5
           h1.d-inline.fw-bold みんなが気になる
           h2.d-inline.fw-bold 質問
-        - if @questions.present?
+        - if @month_question_ranks.present?
           = render "shared/questions_list", questions: @month_question_ranks
+        - else
+          h3 気になる質問はありません
 .sorted_questions
   .container.my-5
     .row.justify-content-end
@@ -35,4 +39,3 @@
           h1#changing-title.d-inline.fw-bold 未回答の
           h2.d-inline.fw-bold 質問
         = render "question_tabs", answered_questions: @answered_questions, unanswered_questions: @unanswered_questions
-      .col-lg-1
