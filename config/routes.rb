@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
     registrations: 'users/registrations',
   }
+  devise_scope :user do
+    get '/users', to: 'devise/registrations#new'
+  end
   resources :users, only: [:show]
   resources :categories, only: [:index] do
     collection do
