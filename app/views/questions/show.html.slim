@@ -15,9 +15,9 @@
       h5.fw-bold.border-bottom タイトル
       p.mt-3.px-2.py-3 = @question.title
       h5.fw-bold.border-bottom 情報
-      p.mt-3.px-2.py-3 = @question.information
+      p.mt-3.px-2.py-3 = safe_join(@question.information.split("\n"), tag(:br))
       h5.fw-bold.border-bottom 内容
-      p.mt-3.px-2.py-3 = @question.content
+      p.mt-3.px-2.py-3 = safe_join(@question.content.split("\n"), tag(:br))
       h5.fw-bold.border-bottom カテゴリー
       - @question.categories.each do |category|
         p= category.name

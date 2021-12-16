@@ -10,7 +10,7 @@
           br
             = reply.user.name
       .d-flex.w-75.flex-column.p-2
-        = reply.content
+        = safe_join(reply.content.split("\n"), tag(:br))
         .text-end
           - if reply.user == current_user
             = link_to "削除", question_answer_path(reply.question.id, reply.id), method: :delete, class: "btn btn-deco text-danger", remote: true

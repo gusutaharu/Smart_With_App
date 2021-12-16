@@ -3,17 +3,20 @@
     - if questions.present?
       = render "shared/questions_list", questions: questions
       = paginate questions, param_name: :page_post, window: 1
-    - else 
-      p.fs-3.mt-5 投稿した質問はありません
+    - else
+      .text-center
+        h3.mt-5 投稿した質問はありません
   #pills-interest.tab-pane.fade[role="tabpanel" aria-labelledby="pills-insterest-tab"]
     - if  interesting_questions.present?
       = render "shared/questions_list", questions: interesting_questions
       = paginate interesting_questions, param_name: :page_interest, window: 1
     - else
-      p.fs-3 気になる質問はまだありません
+      .text-center
+        h3.mt-5 気になる質問はまだありません
   #pills-answer.tab-pane.fade[role="tabpanel" aria-labelledby="pills-answer-tab"]
     - if  answered_questions.present?
       = render "shared/questions_list", questions: answered_questions
       = paginate answered_questions, param_name: :page_answer, window: 1
     - else
-      p.fs-3 回答した質問はまだありません
+      .text-center
+        h3.mt-5 回答した質問はまだありません

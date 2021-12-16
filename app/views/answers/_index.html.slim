@@ -15,7 +15,7 @@ h1.my-4 回答数 #{ answers.where(parent_id: nil).count }件
             br
               = answer.user.name
         .d-flex.w-75.flex-column.p-1
-          = answer.content
+          = safe_join(answer.content.split("\n"), tag(:br))
           .text-end
             - if answer.user == current_user
               = link_to "削除", question_answer_path(answer.question.id, answer.id), method: :delete, class: "btn btn-deco text-danger", remote: true

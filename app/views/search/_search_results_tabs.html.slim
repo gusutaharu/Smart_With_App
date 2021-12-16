@@ -9,11 +9,13 @@
       #unanswered_paginate
         = paginate unanswered_questions, param_name: :page_a, window: 1
     - else
-      | 気になる質問はまだありません
+      .text-center
+        h3.mt-5 未回答の質問はありません
   #pills-answered.tab-pane.fade[role="tabpanel" aria-labelledby="pills-answer-tab"]
     - if  answered_questions.present?
       = render "shared/questions_list", questions: answered_questions
       #answered_paginate
         = paginate answered_questions, param_name: :page_b, window: 1
     - else
-      | 回答した質問はまだありません
+      .text-center
+        h3.mt-5 回答した質問はまだありません

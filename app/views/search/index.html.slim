@@ -1,11 +1,11 @@
 .container
   .row.justify-content-center
+    .mb-5.text-sm-center
+      - if @key_word.empty?
+        h3= "すべての質問 : #{@questions.total_count} 件"
+      - else
+        h3= "#{(@key_word)}の検索結果 : #{@questions.total_count} 件"
     .col-xl-8
-      .mb-5.d-flex
-        - if @key_word.empty?
-          h2= "すべての質問 : #{@questions.total_count} 件"
-        - else
-          h3= "#{(@key_word)}の検索結果 : #{@questions.total_count} 件"
       - if @questions.present?
         ul#pills-tab.nav.nav-pills.mb-3[role="tablist"]
           li.search-sort.nav-item[role="presentation"]
@@ -20,4 +20,5 @@
         #tabs_area
           = render "search_results_tabs", questions: @questions, answered_questions: @answered_questions, unanswered_questions: @unanswered_questions
       - else
-        h4  = "#{@key_word}で検索しましたが、質問が見つかりません"
+        .text-center
+          h4 質問が見つかりません
