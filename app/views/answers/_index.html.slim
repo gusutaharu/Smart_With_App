@@ -1,6 +1,8 @@
-.my-3
-  - if flash.notice.present?
-    .alert.alert-success= flash.notice
+.answer-flash.my-3
+  - flash.each do |key, value|
+    - key = "info" if key == "notice"
+    div class="alert alert-#{key}" #{value}
+      <span class="material-icons"> check_circle
 h1.my-4 回答数 #{ answers.where(parent_id: nil).count }件
 - if answers.present?
   - answers.where(parent_id: nil).each do |answer|

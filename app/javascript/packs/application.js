@@ -20,6 +20,7 @@ import "../src/category.js";
 import "../src/section_title.js";
 import "../src/save_acitve_search.js";
 import "../src/save_active_users.js";
+import "../src/flash.js";
 
 window.Cookies = require("js-cookie")
 

@@ -12,7 +12,10 @@ html
     .main-wrapper.bg-light
       = render "layouts/header", q: @q
       - flash.each do |key, value|
-        div class="alert alert-#{key}" #{value}
+        - key = "info" if key == "notice"
+        .flash
+          div class="alert alert-#{key}" #{value}
+            <span class="material-icons"> check_circle
       = yield
       = render "layouts/footer"
       = render "layouts/sp_fixed_bar"
