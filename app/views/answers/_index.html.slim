@@ -3,12 +3,12 @@
     - key = "info" if key == "notice"
     div class="alert alert-#{key}" #{value}
       <span class="material-icons"> check_circle
-h1.my-4 回答数 #{ answers.where(parent_id: nil).count }件
+h1.my-5 回答数 #{ answers.where(parent_id: nil).count }件
 - if answers.present?
   - answers.where(parent_id: nil).each do |answer|
     .solid-deco.p-sm-5.mb-5.p-3
-      .d-flex.justify-content-between.border-bottom.mb-3
-        .user-icon
+      .answer_items
+        .user_icon
           = link_to user_path(answer.user) do
             - if answer.user.user_icon.present?
               = image_tag answer.user.user_icon.icon.url, class: 'rounded-circle me-2',saize: "48x48"
@@ -16,7 +16,7 @@ h1.my-4 回答数 #{ answers.where(parent_id: nil).count }件
               span.material-icons.md-48.text-secondary.me-2 account_circle
             br
               = answer.user.name
-        .d-flex.w-75.flex-column.p-1
+        .answer_content
           = safe_join(answer.content.split("\n"), tag(:br))
           .text-end
             - if answer.user == current_user
@@ -30,7 +30,7 @@ h1.my-4 回答数 #{ answers.where(parent_id: nil).count }件
     = render "answers/reply_index", question: question, answer: answer
     = render "answers/reply_form", question: question, answer: answer, answer_reply: answer_reply if user_signed_in?
 - else
-  h3 回答はまだありません
+  h3.mb-5 回答はまだありません
 - if user_signed_in?
   = render "answers/form", question: @question, answer: @answer
 - else

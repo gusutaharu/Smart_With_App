@@ -1,6 +1,6 @@
-.repry_area.p-2
+.repry_area
   - answer.replies.each do |reply|
-    .d-flex.justify-content-between.border-bottom.mb-2
+    .reply_items
       .user-icon
         = link_to user_path(reply.user) do
           - if reply.user.user_icon.present?
@@ -9,7 +9,7 @@
             span.material-icons.md-48.text-secondary.me-2 account_circle
           br
             = reply.user.name
-      .d-flex.w-75.flex-column.p-2
+      .reply_content
         = safe_join(reply.content.split("\n"), tag(:br))
         .text-end
           - if reply.user == current_user

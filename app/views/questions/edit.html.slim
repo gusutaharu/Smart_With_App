@@ -3,16 +3,16 @@
     .col-lg-8.solid-deco.mx-auto.px-sm-5.pt-5
       = form_with model: @question, local: true do |f|
         .form-group.mb-5
-          = f.label "タイトル", class: "fs-5 fw-bold"
+          = f.label "タイトル"
           = f.text_field :title, class: "form-control form-deco mt-3 px-2 py-3", id: "question_name"
         .form-group.mb-5
-          = f.label "情報", class: "fs-5 fw-bold"
+          = f.label "情報"
           = f.text_area :information, rows: 5,class: "form-control form-deco mt-3 px-2 py-3", id: "question_information"
         .form-group.mb-4
-          = f.label "内容", class: "fs-5 fw-bold"
+          = f.label "内容"
           = f.text_area :content, rows: 10, class: "form-control form-deco mt-3 px-2 py-3", id: "question_content"
         .form-group
-          = f.label "カテゴリー", class: "fs-5 fw-bold"
+          = f.label "カテゴリー"
           - @question.categories.each do |category|
             p= category.name
         .form-group.mb-4
@@ -28,4 +28,4 @@
           = render partial: "preview"
           = render partial: "img_zoom"
         .text-end.mb-5
-          = f.submit nil, class: "btn border-light bg-white confirm-btn px-5", value: "更新"
+          = f.submit nil, class: "btn btn-deco px-5", value: "更新"

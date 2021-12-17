@@ -1,6 +1,6 @@
 .container
   .row.justify-content-center
-    .col-lg-8.solid-deco.p-sm-5
+    .col-lg-8.solid-deco.p-sm-5#question_show
       .user_icon.m-3
         = link_to user_path(@question.user) do
           - if @question.user.user_icon.present?
@@ -12,16 +12,16 @@
         .text-end
           span 投稿日:
           = l @question.created_at, format: :long
-      h5.fw-bold.border-bottom タイトル
-      p.mt-3.px-2.py-3 = @question.title
-      h5.fw-bold.border-bottom 情報
-      p.mt-3.px-2.py-3 = safe_join(@question.information.split("\n"), tag(:br))
-      h5.fw-bold.border-bottom 内容
-      p.mt-3.px-2.py-3 = safe_join(@question.content.split("\n"), tag(:br))
-      h5.fw-bold.border-bottom カテゴリー
+      h5.border-bottom タイトル
+      p= @question.title
+      h5.border-bottom 情報
+      p= safe_join(@question.information.split("\n"), tag(:br))
+      h5.border-bottom 内容
+      p= safe_join(@question.content.split("\n"), tag(:br))
+      h5.border-bottom カテゴリー
       - @question.categories.each do |category|
         p= category.name
-      .show-img.my-3.px-2.py-3
+      .show-img
         - @question.question_images.each do |image|
           = link_to image_tag(image.url), "", class: "zoom"
           = render partial: "img_zoom"

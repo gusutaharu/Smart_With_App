@@ -1,7 +1,7 @@
-.row.solid-deco.mx-auto.p-sm-5.py-4
+.solid-deco.p-sm-5.p-4
   = form_with model: [question, answer], local: false do |f|
     .form-group
-      = f.label "回答を投稿する", class: "fs-5 fw-bold"
+      = f.label "回答を投稿する"
       = f.text_area :content, rows: 10, class: "form-control form-deco"
     .form-group
       .text-end
