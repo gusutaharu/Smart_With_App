@@ -1,8 +1,8 @@
 .container
-  .row.justify-content-center
-    .col-lg-8
+  .row
+    .col-lg-8.mx-auto
       .text-center.mb-5
-        h1.fw-bold 新規登録
+        h1 新規登録
       = form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
         = render "users/shared/error_messages", resource: @user
         .form-group.mb-4
@@ -23,7 +23,7 @@
           = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-deco p-2"
         .text-center.mb-5
           = f.submit "登録する", class: "btn btn-deco"
-        .form-group
-          label.fs-5.fw-bold アカウントをお持ちの方
+        .form-group.mb-5
+          label アカウントをお持ちの方
           .text-end
             = render "users/shared/links"

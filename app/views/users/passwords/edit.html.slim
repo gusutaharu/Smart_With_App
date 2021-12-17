@@ -1,23 +1,20 @@
-.container.text-center
-  h2
-    | Change your password
-  = form_with model: @user, url: user_password_path, id: 'new_user', class: 'new_user', method: "PUT", local: true do |f|
-    = render "users/shared/error_messages", resource: @user
-    = f.hidden_field :reset_password_token
-    .field
-      = f.label :password, "New password"
-      br
-      - if @minimum_password_length
-        em
-          | (
-          = @minimum_password_length
-          |  characters minimum)
-        br
-      = f.password_field :password, autofocus: true, autocomplete: "new-password"
-    .field
-      = f.label :password_confirmation, "Confirm new password"
-      br
-      = f.password_field :password_confirmation, autocomplete: "new-password"
-    .actions
-      = f.submit "Change my password"
-  = render "users/shared/links"
+.container
+  .row
+    .col-lg-8.mx-auto
+      .text-center.mb-5
+        h1 パスワードを変更
+      = form_with model: @user, url: user_password_path, id: 'new_user', class: 'new_user', method: "PUT", local: true do |f|
+        = render "users/shared/error_messages", resource: @user
+        = f.hidden_field :reset_password_token
+        .form-group.mb-5
+          = f.label :password
+          - if @minimum_password_length
+              | (
+              = @minimum_password_length
+              |  文字以上で作成してください)
+          = f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control form-deco"
+        .form-gorup.mb-5
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-deco"
+        .text-end.mb-5
+          = f.submit "変更する", class: "btn btn-deco"

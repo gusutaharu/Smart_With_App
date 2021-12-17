@@ -1,8 +1,8 @@
 .container
-  .row.justify-content-center
-    .col-lg-8
+  .row
+    .col-lg-8.mx-auto
       .text-center.mb-5
-        h1.fw-bold.mb-5 パスワードを再設定する
+        h1.mb-5 パスワードを再設定する
         p 当サービスでご登録されているメールアドレスを入力して、「送信する」を押してください。
         | 送信後、パスワードの再設定に関するメールが届きますのでご確認ください。
       = form_with model: @user, url: user_password_path, id: 'new_user', class: 'new_user', local: true do |f|

@@ -1,6 +1,6 @@
 .container
-  .row.justify-content-center
-    .col-xl-8
+  .row
+    .col-xl-8.mx-auto
       #user_info.mb-5.text-center
         - if @user.user_icon?
           = image_tag @user.user_icon.url, class:'rounded-circle',size: "96x96"
@@ -8,7 +8,7 @@
           span.material-icons.md-96.text-secondary account_circle
         p.fs-3= @user.name
         .text-end= link_to "編集する", edit_user_registration_path, class: "btn btn-deco" if @user == current_user
-      #questions_area
+      #users_question
         ul#pills-tab.nav.nav-pills.mb-3[role="tablist"]
           li.users-sort.nav-item[role="presentation"]
             a#pills-post-tab.nav-link.btn-deco.me-1.active[data-bs-toggle="pill" href="#pills-post" role="tab" aria-controls="pills-post" aria-selected="true"]

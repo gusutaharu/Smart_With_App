@@ -1,8 +1,8 @@
 .container
-  .row.justify-content-center
-    .col-lg-8
-      .text-center
-        h1.fw-bold アカウント設定
+  .row
+    .col-lg-8.mx-auto
+      .text-center.mb-5
+        h1 アカウント設定
       = form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
         = render "users/shared/error_messages", resource: @user
         .form-group.my-4
@@ -21,17 +21,17 @@
             = f.label :user_icon, "画像を選択", class: "btn btn-deco mb-3"
             = f.file_field :user_icon, class: "d-none"
             p jpg、png、gif形式でサイズが5MB以内
-        .form-group.mb-3.fs-5.fw-bold
+        .form-group.mb-3
           = f.label :name
           = f.text_field :name, autofocus: true, class: "form-deco form-control p-3"
-        .form-group.mb-3.fs-5.fw-bold
+        .form-group.mb-3
           = f.label :email
           = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-deco form-control p-3"
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
           div
             | Currently waiting confirmation for: 
             = resource.unconfirmed_email
-        .form-group.mb-3.fw-bold
+        .form-group.mb-3
           = f.label :password
           br
             | (変更しない場合は空白にしてください)
@@ -43,8 +43,8 @@
         .form-group.mb-3.fs-5.fw-bold
           = f.label :password_confirmation
           br
-          = f.password_field :password_confirmation, autocomplete: "new-password",class: "form-deco form-control p-3"
-        .form-group.mb-5.fw-bold
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-deco form-control p-3"
+        .form-group.my-5
           label アカウントを削除する
           .text-end
             = link_to "削除する", registration_path(@user), data: { confirm: "このアカウントを削除します。この操作は取り消せません。よろしいですか？" }, method: :delete, class: "btn btn-deco text-danger"
