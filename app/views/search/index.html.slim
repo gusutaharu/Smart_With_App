@@ -1,11 +1,11 @@
 .container
-  .row.justify-content-center
+  .row
     .mb-5.text-sm-center
       - if @key_word.empty?
         h3= "すべての質問 : #{@questions.total_count} 件"
       - else
         h3= "#{(@key_word)}の検索結果 : #{@questions.total_count} 件"
-    .col-xl-8
+    .col-xl-8.mx-auto
       - if @questions.present?
         ul#pills-tab.nav.nav-pills.mb-3[role="tablist"]
           li.search-sort.nav-item[role="presentation"]
