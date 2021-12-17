@@ -1,19 +1,19 @@
 .top
   .container.mb-sm-4
-    .d-flex.align-items-center.justify-content-center.radius-rounded.px-5
+    .banner
       = image_pack_tag 'top.png', class: "me-2"
-      div.pt-5.text-secondary
-        h2.my-3.fw-bold スマートフォンに関するお悩みを一緒に解決
-        h3.text-end.mt-5.fw-bold Smart With
+      .pt-5
+        h2.my-3 スマートフォンに関するお悩みを一緒に解決
+        h3.text-end.mt-5 Smart With
 .new_questions
   .container
     .row
       .col-lg-4
         = render "top_category_list"
       .col-lg-8
-        .text-secondary.my-5
-          h1.d-inline.fw-bold 新着
-          h2.d-inline.fw-bold の質問
+        .my-5
+          h1.d-inline 新着
+          h2.d-inline の質問
         - if @questions.present?
           = render "shared/questions_list", questions: @questions
           .text-end.mt-3
@@ -24,9 +24,9 @@
   .container
     .row
       .col-lg-8
-        .text-secondary.my-5
-          h1.d-inline.fw-bold みんなが気になる
-          h2.d-inline.fw-bold 質問
+        .my-5
+          h1.d-inline みんなが気になる
+          h2.d-inline 質問
         - if @month_question_ranks.present?
           = render "shared/questions_list", questions: @month_question_ranks
         - else
@@ -35,7 +35,7 @@
   .container.my-5
     .row.justify-content-end
       .col-lg-8
-        .text-secondary.my-5
-          h1#changing-title.d-inline.fw-bold 未回答の
-          h2.d-inline.fw-bold 質問
+        .my-5
+          h1#changing-title.d-inline 未回答の
+          h2.d-inline 質問
         = render "question_tabs", answered_questions: @answered_questions, unanswered_questions: @unanswered_questions
