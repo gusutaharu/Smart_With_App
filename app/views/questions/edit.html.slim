@@ -3,16 +3,16 @@
     .col-lg-8.solid-deco.mx-auto.px-sm-5.pt-5
       = form_with model: @question, local: true do |f|
         .form-group.mb-5
-          = f.label "タイトル"
+          = f.label :title
           = f.text_field :title, class: "form-control form-deco mt-3 px-2 py-3", id: "question_name"
         .form-group.mb-5
-          = f.label "情報"
+          = f.label :information
           = f.text_area :information, rows: 5,class: "form-control form-deco mt-3 px-2 py-3", id: "question_information"
         .form-group.mb-4
-          = f.label "内容"
+          = f.label :content
           = f.text_area :content, rows: 10, class: "form-control form-deco mt-3 px-2 py-3", id: "question_content"
         .form-group
-          = f.label "カテゴリー"
+          = f.label :category
           - @question.categories.each do |category|
             p= category.name
         .form-group.mb-4

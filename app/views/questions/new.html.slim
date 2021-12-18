@@ -3,15 +3,15 @@
     .col-lg-8.solid-deco.mx-auto.px-sm-5.pt-5
       = form_with model: @question, local: true do |f|
         .form-group.mb-5
-          = f.label "タイトル"
+          = f.label :title
           p 質問のタイトルを20字以内で書きましょう
           = f.text_field :title, class: "form-control form-deco mt-3 p-3", placeholder: "例: OSのアップデートができない"
         .form-group.mb-5
-          = f.label "情報"
+          = f.label :information
           p お使いの機種やOSのバージョンなど、症状の解決につながる情報を書きましょう
           = f.text_area :information, rows: 5, class: "form-control form-deco mt-3 p-3", placeholder: "例: 機種:iPhone 7 OS:iOS 11.00"
         .form-group.mb-4
-          = f.label "内容"
+          = f.label :content
           p お困りの内容をわかる範囲で、環境や状況そして再現頻度なども含めて書きましょう
           = f.text_area :content, rows: 10, class: "form-control form-deco mt-3 p-3", placeholder: "例: スマホからアップデートをWi-Fi接続下で行いましたが、アップデートデータのダウンロードが行われません。空き容量も不足しておらず原因がわかりません。"
         .form-group
