@@ -13,6 +13,7 @@ html
       = render "layouts/header", q: @q
       - flash.each do |key, value|
         - key = "info" if key == "notice"
+        - key = "danger" if key == "alert"
         .flash
           div class="alert alert-#{key}" #{value}
             <span class="material-icons"> check_circle

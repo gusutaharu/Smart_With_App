@@ -96,6 +96,21 @@ h5 {
   vertical-align: middle;
 }
 
+/* error_messages */
+
+#error_explanation {
+  background-color: #f8d7da;
+  border: 5px solid #f5c2c7;
+  border-radius: 20px;
+  margin-bottom: 48px;
+  padding: 10px;
+}
+
+#error_explanation p {
+  font-size: 28px;
+  font-weight: bold;
+}
+
 /* header */
 
 header {
