@@ -31,5 +31,10 @@
         - if @question.user == current_user 
           = link_to "編集", edit_question_path(@question), class: "btn btn-deco me-3"
           = link_to "削除", @question, method: :delete, data: { confirm: "この質問を削除します。この操作は取り消せません。よろしいですか？" }, class: "btn btn-deco text-danger"
-    .col-lg-8#answers-area
-      = render "answers/index", question: @question, answers: @answers, answer_reply: @answer_reply
+    .col-lg-8
+      #answers-area
+        = render "answers/index", question: @question, answers: @answers, answer_reply: @answer_reply
+      - if user_signed_in?
+        = render "answers/form", question: @question, answer: @answer
+      - else
+        h4 回答にはログインが必要です

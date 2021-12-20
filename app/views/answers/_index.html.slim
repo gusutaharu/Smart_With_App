@@ -31,7 +31,3 @@ h1.my-5 回答数 #{ answers.where(parent_id: nil).count }件
     = render "answers/reply_form", question: question, answer: answer, answer_reply: answer_reply if user_signed_in?
 - else
   h3.mb-5 回答はまだありません
-- if user_signed_in?
-  = render "answers/form", question: @question, answer: @answer
-- else
-  h4 回答にはログインが必要です
