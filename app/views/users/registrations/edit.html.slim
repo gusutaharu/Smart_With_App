@@ -8,10 +8,7 @@
         .form-group.my-4
           .d-flex.justify-content-center
             .text-center.me-5
-              - if @user.user_icon?
-                = image_tag @user.user_icon.url, class: 'rounded-circle mb-2',size: "96x96"
-              - else
-                span.material-icons.md-96.text-secondary account_circle
+              = render 'users/user_icon_big', user: @user
               p 現在の画像
             #icon_preview
               span.material-icons.md-96.text-secondary account_circle

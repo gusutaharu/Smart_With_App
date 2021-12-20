@@ -2,13 +2,7 @@
   .row.justify-content-center
     .col-lg-8.solid-deco.p-sm-5#question_show
       .user_icon.m-3
-        = link_to user_path(@question.user) do
-          - if @question.user.user_icon.present?
-            = image_tag @question.user.user_icon.icon.url, class: 'rounded-circle me-2',saize: "48x48"
-          - else
-            span.material-icons.md-48.text-secondary.me-2 account_circle
-          br
-          = @question.user.name
+        = render 'shared/user_icon', object: @question 
         .text-end
           span 投稿日:
           = l @question.created_at, format: :long
