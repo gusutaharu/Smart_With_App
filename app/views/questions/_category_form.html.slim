@@ -1,6 +1,6 @@
-.listing-form-box
-  .listing-product-detail__category.fs-4.fw-bold
+.category_area
+  .category_form.fs-4.fw-bold
     = f.label :category, class: 'listing-default_label'
-    .linting-select-wrapper
-      .listing-select-wrapper__box
-        = f.select :category_id, @category_hardware, {}, { class: 'listing-select-wrapper__box-_select', id: 'hardware_category', name: 'question[category_ids][]' }
+    .category-select-wrapper
+      .category-select-box
+        = f.select :category_id, @category_hardware, {}, { class: 'category-select-box_select', id: 'hardware_category', name: 'question[category_ids][]' }

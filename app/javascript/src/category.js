@@ -5,27 +5,27 @@ $(document).on('turbolinks:load', function() {
   }
   function appendChildrenBox(insertHTML){
     let childSelectHtml = '';
-    childSelectHtml = `<div class='listing-select-wrapper__added' id= 'children_wrapper'>
-                        <div class='listing-select-wrapper__box'>
-                          <select class='listing-select-wrapper__box--select' id='child_category' name='question[category_ids][]'>
+    childSelectHtml = `<div class='category-select-wrapper_added' id= 'children_wrapper'>
+                        <div class='category-select-wrapper_box'>
+                          <select class='category-select-wrapper_box-select' id='child_category' name='question[category_ids][]'>
                             <option data-category=''></option>
                             ${insertHTML}
                           </select>
                         </div>
                       </div>`;
-    $('.listing-product-detail__category').append(childSelectHtml);
+    $('.category_form').append(childSelectHtml);
   }
   function appendGrandchildrenBox(insertHTML){
     let grandchildSelectHtml = '';
-    grandchildSelectHtml = `<div class='listing-select-wrapper__added' id= 'grandchildren_wrapper'>
-                              <div class='listing-select-wrapper__box'>
-                                <select class='listing-select-wrapper__box--select' id='grandchild_category' name='question[category_ids][]'>
+    grandchildSelectHtml = `<div class='category-select-wrapper_added' id= 'grandchildren_wrapper'>
+                              <div class='category-select-wrapper_box'>
+                                <select class='category-select-wrapper_box-select' id='grandchild_category' name='question[category_ids][]'>
                                   <option data-category=''></option>
                                   ${insertHTML}
                                 </select>
                               </div>
                             </div>`;
-    $('.listing-product-detail__category').append(grandchildSelectHtml);
+    $('.category_form').append(grandchildSelectHtml);
   }
   $('#hardware_category').on('change', function(){
     let hardwareId = document.getElementById('hardware_category').value;
@@ -53,7 +53,7 @@ $(document).on('turbolinks:load', function() {
       $('#grandchildren_wrapper').remove();
     }
   });
-  $('.listing-product-detail__category').on('change', '#child_category', function(){
+  $('.category_form').on('change', '#child_category', function(){
     let childId = $('#child_category option:selected').data('category');
     if (childId != ""){
       $.ajax({

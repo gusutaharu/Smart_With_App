@@ -21,13 +21,13 @@ $(document).on('turbolinks:load', function() {
     $('#output-category_grandchild').text('');
   });
 
-  $('.listing-product-detail__category').on('change', '#child_category', function(){
+  $('.category_form').on('change', '#child_category', function(){
     let os_category = $('#child_category option:selected').text();
     $('#output-category_child').text(os_category);
     $('#output-category_grandchild').text('');
   });
 
-  $('.listing-product-detail__category').on('change', '#grandchild_category', function(){
+  $('.category_form').on('change', '#grandchild_category', function(){
     let condition_category = $('#grandchild_category option:selected').text();
     $('#output-category_grandchild').text(condition_category);
   });
