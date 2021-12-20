@@ -7,7 +7,7 @@ class AnswersController < ApplicationController
     @answer.user_id = current_user.id
     @answer_reply = @question.answers.new
     if @answer.save
-      flash.now[:notice] = "投稿に成功しました"
+      flash.now[:success] = "投稿に成功しました"
       render :answer
     else
       render :error
@@ -19,6 +19,7 @@ class AnswersController < ApplicationController
     @answer_reply = @question.answers.new
     @answer = Answer.find(params[:id])
     @answer.destroy
+    flash.now[:notice] = "投稿を削除しました"
     render :answer
   end
 

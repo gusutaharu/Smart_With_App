@@ -1,37 +1,41 @@
-.container.mx-auto.p-sm-4.p-3
-  .row
-    h2.text-secondary.fw-bold 新着の質問
-    .col-md.me-sm-4.p-4
-      - if @question_top.present?
-        .my-3
-          label.btn-deco.rounded-pill.px-3.py-1.my-3 タイトル
-          .btn-deco.p-2
-            = @question_top.title
-        .my-3
-          label.btn-deco.rounded-pill.px-3.py-1.my-3 情報
-          .btn-deco.p-2
-            = @question_top.information
-        .my-3.p-2
-          label.btn-deco.rounded-pill.px-3.py-1.my-3 内容
-          .btn-deco.p-2
-            = @question_top.content
-        = render "answers/answer_count", question: @question_top
-        .d-flex.justify-content-between
-          div class="interest-#{@question_top.id}"
-            = render "interests/interest", question: @question_top
-          = link_to "この質問の詳細へ", @question_top, class: "btn btn-deco"
-      - else
-        p  質問が投稿されていません
-    - if @questions.present?
-      .col-md.solid-deco
-        - @questions.each do |question|
-          .form-deco.p-2.my-3
-            .btn-deco.p-2.d-flex.justify-content-between
-              .d-flex.flex-column
-                = link_to "#{question.title}", question
-                = render "answers/answer_count", question: question
-              .d-flex.flex-column.text-end
-                div class="interest-#{question.id}"
-                  = render "interests/interest", question: question
-                = question.created_at.strftime('%Y/%m/%d')
-  = render "questions_dropdowns", answered_questions: @answered_questions, unanswered_questions: @unanswered_questions
+.top
+  .container.mb-sm-4
+    .banner
+      = image_pack_tag 'top.png', class: "me-2"
+      .pt-5
+        h2.my-3 スマートフォンに関するお悩みを一緒に解決
+        h3.text-end.mt-5 Smart With
+.new_questions
+  .container
+    .row
+      .col-lg-4
+        = render "top_category_list"
+      .col-lg-8
+        .my-5
+          h1.d-inline 新着
+          h2.d-inline の質問
+        - if @questions.present?
+          = render "shared/questions_list", questions: @questions
+          .text-end.mt-3
+            = link_to  "もっと見る", search_index_path(q: {:title_or_information_or_content_cont => "" }), class: "btn btn-deco"
+        - else
+          h3 新着の質問はありません
+.popular_questions
+  .container
+    .row
+      .col-lg-8
+        .my-5
+          h1.d-inline みんなが気になる
+          h2.d-inline 質問
+        - if @month_question_ranks.present?
+          = render "shared/questions_list", questions: @month_question_ranks
+        - else
+          h3 気になる質問はありません
+.sorted_questions
+  .container.my-5
+    .row.justify-content-end
+      .col-lg-8
+        .my-5
+          h1#changing-title.d-inline 未回答の
+          h2.d-inline 質問
+        = render "question_tabs", answered_questions: @answered_questions, unanswered_questions: @unanswered_questions

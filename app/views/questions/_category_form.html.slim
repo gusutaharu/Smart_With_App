@@ -1,0 +1,6 @@
+.category_area
+  .category_form.fs-4.fw-bold
+    = f.label :category, class: 'listing-default_label'
+    .category-select-wrapper
+      .category-select-box
+        = f.select :category_id, @category_hardware, {}, { class: 'category-select-box_select', id: 'hardware_category', name: 'question[category_ids][]' }

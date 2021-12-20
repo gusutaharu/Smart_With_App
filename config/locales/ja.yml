@@ -1,6 +1,20 @@
 ---
 ja:
   activerecord:
+    models:
+      question: 質問
+      interest: 気になる
+      answer: 回答
+      category: カテゴリー
+    attributes:
+      question:
+        title: タイトル
+        information: 情報
+        content: 内容
+        category: カテゴリー
+        category_ids: カテゴリー
+      answer:
+        content: 内容
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

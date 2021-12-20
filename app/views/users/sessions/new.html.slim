@@ -1,19 +1,22 @@
-.container.text-center
-  h2
-    | Log in
-  = form_with model: @user, url: user_session_path, id: 'new_user', class: 'new_user', local: true do |f|
-    .field
-      = f.label :email
-      br
-      = f.email_field :email, autofocus: true, autocomplete: "email"
-    .field
-      = f.label :password
-      br
-      = f.password_field :password, autocomplete: "current-password"
-    - if devise_mapping.rememberable?
-      .field
-        = f.check_box :remember_me
-        = f.label :remember_me
-    .actions
-      = f.submit "Log in"
-  = render "users/shared/links"
+.container
+  .row
+    .col-lg-8.mx-auto
+      .text-center.mb-5
+        h1 ログイン
+      = form_with model: @user, url: user_session_path, id: 'new_user', class: 'new_user', local: true do |f|
+        .form-group.mb-5
+          = f.label :email
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-deco p-2"
+        .form-group.mb-5
+          = f.label :password
+          = f.password_field :password, autocomplete: "current-password", class: "form-control form-deco p-2"
+        - if devise_mapping.rememberable?
+          .form-group.mb-5
+            = f.check_box :remember_me
+            = f.label :remember_me
+        .text-center.mb-5
+          = f.submit "ログインする", class: "btn btn-deco"
+        .form-group.mb-5
+          label アカウントをお持ちでない方
+          .text-end
+            = render "users/shared/links"

@@ -1,0 +1,8 @@
+#condition_list
+  span.material-icons check_circle_outline
+  span.border-bottom.fw-bold.fs-3
+    = selected_os.name
+  ul.fs-4
+    li.my-3= link_to "すべて", search_index_path(q: {:categories_name_eq=>"#{selected_os.name}"}, hardware_name: "#{selected_hardware.name}")
+    - category_condition.each do |condition|
+      li.mb-4= link_to condition.name, search_index_path(q: {:categories_id_eq=>"#{condition.id}"},hardware_name: "#{selected_hardware.name}", os_name: "#{selected_os.name}")

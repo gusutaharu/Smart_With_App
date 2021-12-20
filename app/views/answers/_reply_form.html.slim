@@ -1,7 +1,7 @@
 = form_with model: [question, answer_reply], local: false do |f|
-  .form-group
-    = f.label "投稿する"
+  .form-group.mb-4
+    = f.label "コメントをする"
     = f.text_area :content, class: "form-control form-deco"
     = f.hidden_field :parent_id, value: answer.id
-  .text-end
+  .text-end.mb-4
     = f.submit "投稿する", class: "btn btn-deco"

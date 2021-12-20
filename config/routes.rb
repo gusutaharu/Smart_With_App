@@ -10,10 +10,23 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
     registrations: 'users/registrations',
   }
+  devise_scope :user do
+    get '/users', to: 'devise/registrations#new'
+  end
   resources :users, only: [:show]
+  resources :categories, only: [:index] do
+    collection do
+      get :get_os
+      get :get_condition
+    end
+  end
   resources :questions do
-    get :search_results, on: :collection
+    collection do
+      get :get_category_os, defaults: { format: 'json' }
+      get :get_category_condition, defaults: { format: 'json' }
+    end
     resource :interests, only: [:create, :destroy]
     resources :answers, only: [:create, :destroy]
   end
+  resources :search, only: [:index]
 end

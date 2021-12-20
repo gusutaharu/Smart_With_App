@@ -7,17 +7,21 @@
         button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
       .modal-body
         p.fs-5 画面のスクリーンショットなど画像を投稿する際、個人情報が映り込んでいる場合がございます。必ずご確認ください。
-        h5 タイトル
+        label タイトル
         p#output-title
-        h5 情報
+        label 情報
         p#output-information
-        h5 内容
+        label 内容
         p#output-content
+        label カテゴリー
+        p#output-category_parent
+        p#output-category_child
+        p#output-category_grandchild
         = render partial: "preview"
         = render partial: "img_zoom"
       .modal-footer
         button type="button" class="btn btn-deco" data-bs-dismiss="modal"
           | 入力に戻る
         .text-end
-          = f.submit nil, class: "btn border-light bg-white confirm-btn px-5", value: "投稿"
+          = f.submit nil, class: "btn btn-deco px-5", value: "投稿"
 

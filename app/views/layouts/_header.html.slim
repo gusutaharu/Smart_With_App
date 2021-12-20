@@ -1,39 +1,11 @@
 header
-  nav.navbar.navbar-expand-lg.bg-light.d-flex.flex-column
-    .container-fluid.d-flex.justify-content-around.mt-3.mb-5
+  nav.navbar.navbar-expand-md
+    .container-fluid
       = link_to "SmartWith", root_path, class: "navbar-brand fs-1 fw-bold text-secondary"
-      = search_form_for q, url: search_results_questions_path, class: "d-flex" do |f|
+      = search_form_for q, url: search_index_path, class: "d-flex" do |f|
         = f.search_field :title_or_information_or_content_cont, class: "form-deco form-control me-2"
         = f.submit class: "btn btn-deco"
-    button.navbar-toggler.btn-deco.border-light type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
-      span.navbar-toggler-icon
+      button.navbar-toggler.btn-deco type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+        span.material-icons.text-secondary menu
     .collapse.navbar-collapse#navbarSupportedContent
-      ul.navbar-nav.mx-5.mt-3.p-4.btn-deco.rounded-pill.text-center
-        - if user_signed_in?
-          li.nav-item.ms-3
-            = link_to user_path(current_user),class: "d-flex mt-1" do
-              - if current_user.user_icon?
-                = image_tag current_user.user_icon.icon.url, class: 'rounded-circle',size: "36x36"
-              - else
-                span.material-icons.md-36.text-secondary account_circle
-          li.nav-item.me-3
-            = link_to current_user.name, user_path(current_user), class: "nav-link btn", 'aria-current': "page"
-          li.nav-item.mx-3
-            = link_to "ホーム", root_path, class: "nav-link btn", 'aria-current': "page"
-          li.nav-item.mx-3
-            = link_to "サイトについて", "#", class: "nav-link btn", 'aria-current': "page"
-          li.nav-item.mx-3
-            = link_to "ログアウト", destroy_user_session_path,method: :delete, class: "nav-link btn", 'aria-current': "page"
-          li.nav-item.mx-3
-            = link_to "質問をする", new_question_path, class: "nav-link btn", 'aria-current': "page"
-        - else
-          li.nav-item.mx-3
-            = link_to "ホーム", root_path, class: "nav-link btn", 'aria-current': "page"
-          li.nav-item.mx-3
-            = link_to "ログイン", new_user_session_path, class: "nav-link btn", 'aria-current': "page"
-          li.nav-item.mx-3
-            = link_to "新規登録", new_user_registration_path, class: "nav-link btn", 'aria-current': "page"
-          li.nav-item.mx-3
-            = link_to "サイトについて", "#", class: "nav-link btn", 'aria-current': "page"
-          li.nav-item.mx-3
-            = link_to "質問をする", new_question_path, class: "nav-link btn", 'aria-current': "page"
+      = render 'layouts/navbar-nav'

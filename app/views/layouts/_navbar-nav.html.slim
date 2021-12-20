@@ -1,0 +1,29 @@
+ul.navbar-nav
+  - if user_signed_in?
+    li.nav-item.me-lg-3
+      = link_to user_path(current_user),class: "d-flex mt-1" do
+        - if current_user.user_icon?
+          = image_tag current_user.user_icon.icon.url, class: 'rounded-circle', size: "36x36"
+        - else
+          span.material-icons.md-36.text-secondary account_circle
+    li.nav-item.me-lg-3
+      = link_to current_user.name, user_path(current_user), class: "nav-link btn", 'aria-current': "page"
+    li.nav-item.mx-3
+      = link_to "ホーム", root_path, class: "nav-link btn", 'aria-current': "page"
+    li.nav-item.mx-3
+      = link_to "カテゴリー",  categories_path, class: "nav-link btn", 'aria-current': "page"
+    li.nav-item.mx-3
+      = link_to "ログアウト", destroy_user_session_path,method: :delete, class: "nav-link btn", 'aria-current': "page"
+    li.nav-item.mx-3
+      = link_to "質問をする", new_question_path, class: "nav-link btn", 'aria-current': "page"
+  - else
+    li.nav-item.mx-3
+      = link_to "ホーム", root_path, class: "nav-link btn", 'aria-current': "page"
+    li.nav-item.mx-3
+      = link_to "ログイン", new_user_session_path, class: "nav-link btn", 'aria-current': "page"
+    li.nav-item.mx-3
+      = link_to "新規登録", new_user_registration_path, class: "nav-link btn", 'aria-current': "page"
+    li.nav-item.mx-3
+      = link_to "カテゴリー", categories_path, class: "nav-link btn", 'aria-current': "page"
+    li.nav-item.mx-3
+      = link_to "質問をする", new_question_path, class: "nav-link btn", 'aria-current': "page"

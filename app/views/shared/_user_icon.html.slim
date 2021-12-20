@@ -1,0 +1,7 @@
+= link_to user_path(object.user) do
+  - if object.user.user_icon.present?
+    = image_tag object.user.user_icon.icon.url, class: 'rounded-circle me-2',saize: "48x48"
+  - else
+    span.material-icons.md-48.text-secondary.me-2 account_circle
+  br
+    = object.user.name

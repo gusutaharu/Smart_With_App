@@ -1,0 +1,16 @@
+ul#pills-tab.nav.nav-pills.mb-3[role="tablist"]
+  li.nav-item[role="presentation"]
+    a#pills-unanserwered-tab.nav-link.btn-deco.me-2.active[data-bs-toggle="pill" href="#pills-unanserwered" role="tab" aria-controls="page" aria-selected="true"]
+      | 未回答の質問
+  li.nav-item[role="presentation"]
+    a#pills-anserwered-tab.nav-link.btn-deco[data-bs-toggle="pill" href="#pills-anserwered" role="tab" aria-controls="page" aria-selected="false"]
+      | 回答済みの質問
+#pills-tabContent.tab-content
+  #pills-unanserwered.tab-pane.fade.show.active[role="tabpanel" aria-labelledby="pills-unanserwered-tab"]
+    = render "shared/questions_list", questions: unanswered_questions
+    - unless unanswered_questions.present?
+      h3 未回答の質問はありません
+  #pills-anserwered.tab-pane.fade[role="tabpanel" aria-labelledby="pills-anserwered-tab"]
+    = render "shared/questions_list", questions: answered_questions
+    - unless answered_questions.present?
+      h3 回答済みの質問はありません

@@ -1,0 +1,24 @@
+.container
+  .row
+    .mb-5.text-sm-center
+      - if @key_word.empty?
+        h3= "すべての質問 : #{@questions.total_count} 件"
+      - else
+        h3= "#{(@key_word)}の検索結果 : #{@questions.total_count} 件"
+    .col-xl-8.mx-auto
+      - if @questions.present?
+        ul#pills-tab.nav.nav-pills.mb-3[role="tablist"]
+          li.search-sort.nav-item[role="presentation"]
+            a#pills-all-tab.nav-link.btn-deco.me-2.active[data-bs-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true"]
+              | すべて
+          li.search-sort.nav-item[role="presentation"]
+            a#pills-unanswered-tab.nav-link.me-2.btn-deco[data-bs-toggle="pill" href="#pills-unanswered" role="tab" aria-controls="pills-unanswered" aria-selected="false"]
+              | 未回答
+          li.search-sort.nav-item[role="presentation"]
+            a#pills-answered-tab.nav-link.btn-deco[data-bs-toggle="pill" href="#pills-answered" role="tab" aria-controls="pills-answered" aria-selected="false"]
+              | 回答済み
+        #tabs_area
+          = render "search_results_tabs", questions: @questions, answered_questions: @answered_questions, unanswered_questions: @unanswered_questions
+      - else
+        .text-center
+          h4 質問が見つかりません
